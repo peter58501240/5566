@@ -16,10 +16,6 @@
         .active-tab { border-bottom: 2px solid #b91c1c; color: #b91c1c; font-weight: bold; }
         .scroll-hide::-webkit-scrollbar { display: none; }
         .scroll-hide { -ms-overflow-style: none; scrollbar-width: none; }
-        
-        /* Modal Animation */
-        .modal { transition: opacity 0.25s ease; }
-        body.modal-active { overflow: hidden; }
     </style>
 </head>
 <body class="bg-gray-50 text-gray-800 pb-20 select-none">
@@ -33,7 +29,9 @@
                     <h1 class="text-lg font-bold tracking-wide">冬日雙城遊</h1>
                     <p class="text-xs text-red-200">2025/12/04 - 12/12</p>
                 </div>
-           
+            </div>
+            <!-- Removed Install Button -->
+        </div>
         
         <!-- Date Slider -->
         <div class="flex overflow-x-auto whitespace-nowrap bg-white border-b scroll-hide px-2 py-2" id="dateTabs">
@@ -51,48 +49,7 @@
         <i class="fas fa-map-marked-alt text-2xl"></i>
     </a>
 
-    <!-- Install Instruction Modal -->
-    <div id="installModal" class="modal opacity-0 pointer-events-none fixed w-full h-full top-0 left-0 flex items-center justify-center z-50">
-        <div class="modal-overlay absolute w-full h-full bg-gray-900 opacity-50" onclick="toggleModal('installModal')"></div>
-        
-        <div class="modal-container bg-white w-11/12 max-w-sm mx-auto rounded-xl shadow-2xl z-50 overflow-y-auto animate-bounce-in transform scale-100 transition-transform">
-            
-            <div class="bg-red-800 text-white px-4 py-3 font-bold flex justify-between items-center rounded-t-xl">
-                <span><i class="fas fa-mobile-alt mr-2"></i>如何存成 App？</span>
-                <button onclick="toggleModal('installModal')" class="text-white hover:text-red-200"><i class="fas fa-times"></i></button>
-            </div>
-
-            <div class="p-6 text-left">
-                <div class="mb-6">
-                    <h3 class="text-gray-800 font-bold text-lg mb-2 flex items-center">
-                        <i class="fab fa-apple text-xl mr-2"></i> iPhone (Safari)
-                    </h3>
-                    <ol class="list-decimal pl-5 text-sm text-gray-600 space-y-1">
-                        <li>點擊瀏覽器下方的 <strong class="text-blue-600">分享按鈕</strong> <i class="fas fa-share-square"></i></li>
-                        <li>往下滑，找到 <strong class="text-gray-800">「加入主畫面」</strong></li>
-                        <li>點擊右上角的「加入」即可</li>
-                    </ol>
-                </div>
-                
-                <div>
-                    <h3 class="text-gray-800 font-bold text-lg mb-2 flex items-center">
-                        <i class="fab fa-android text-xl mr-2 text-green-600"></i> Android (Chrome)
-                    </h3>
-                    <ol class="list-decimal pl-5 text-sm text-gray-600 space-y-1">
-                        <li>點擊瀏覽器右上角的 <strong class="text-gray-800">三個點</strong> <i class="fas fa-ellipsis-v"></i></li>
-                        <li>選擇 <strong class="text-gray-800">「加到主畫面」</strong> 或 「安裝應用程式」</li>
-                        <li>確認新增即可</li>
-                    </ol>
-                </div>
-
-                <div class="mt-6 pt-4 border-t text-center">
-                    <button onclick="toggleModal('installModal')" class="bg-gray-100 text-gray-700 px-6 py-2 rounded-full text-sm font-medium hover:bg-gray-200">
-                        我學會了！
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
+    <!-- Removed Install Instruction Modal -->
 
     <script>
         const itinerary = [
@@ -209,12 +166,7 @@
         const scheduleContainer = document.getElementById('scheduleContainer');
         const body = document.body;
 
-        function toggleModal(modalID) {
-            const modal = document.getElementById(modalID);
-            modal.classList.toggle('opacity-0');
-            modal.classList.toggle('pointer-events-none');
-            body.classList.toggle('modal-active');
-        }
+        // Removed toggleModal function
 
         function renderTabs(activeIndex) {
             dateTabs.innerHTML = '';
@@ -294,5 +246,4 @@
 
     </script>
 </body>
-
 </html>
