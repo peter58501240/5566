@@ -16,9 +16,11 @@
         .active-tab { border-bottom: 2px solid #b91c1c; color: #b91c1c; font-weight: bold; }
         .scroll-hide::-webkit-scrollbar { display: none; }
         .scroll-hide { -ms-overflow-style: none; scrollbar-width: none; }
+        .nav-active { color: #b91c1c; font-weight: bold; }
+        .nav-inactive { color: #9ca3af; }
     </style>
 </head>
-<body class="bg-gray-50 text-gray-800 pb-20 select-none">
+<body class="bg-gray-50 text-gray-800 pb-24 select-none">
 
     <!-- Header -->
     <header class="fixed top-0 left-0 right-0 bg-white shadow-md z-50">
@@ -30,33 +32,51 @@
                     <p class="text-xs text-red-200">2025/12/04 - 12/12</p>
                 </div>
             </div>
-            <!-- Removed Install Button -->
         </div>
         
-        <!-- Date Slider -->
-        <div class="flex overflow-x-auto whitespace-nowrap bg-white border-b scroll-hide px-2 py-2" id="dateTabs">
+        <!-- Date Slider (Only shown in Schedule View) -->
+        <div class="flex overflow-x-auto whitespace-nowrap bg-white border-b scroll-hide px-2 py-2 transition-all duration-300" id="dateTabs">
             <!-- Tabs will be injected by JS -->
         </div>
     </header>
 
     <!-- Main Content Container -->
-    <main class="container mx-auto px-4 pt-32 max-w-md pb-8" id="scheduleContainer">
-        <!-- Schedule cards will be injected by JS -->
+    <main class="container mx-auto px-4 pt-32 max-w-md pb-4 relative">
+        
+        <!-- Schedule View -->
+        <div id="scheduleView" class="animate-fade-in">
+            <!-- Schedule cards will be injected by JS -->
+        </div>
+
+        <!-- Restaurant View -->
+        <div id="restaurantView" class="hidden animate-fade-in pt-2">
+            <!-- Restaurant list will be injected by JS -->
+        </div>
+
     </main>
 
-    <!-- Floating Action Button for Map -->
-    <a href="https://www.google.com/maps" target="_blank" class="fixed bottom-8 right-6 bg-red-700 text-white w-14 h-14 rounded-full shadow-xl hover:bg-red-800 transition transform active:scale-95 flex items-center justify-center z-40">
-        <i class="fas fa-map-marked-alt text-2xl"></i>
+    <!-- Bottom Navigation -->
+    <nav class="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 flex justify-around items-center py-2 pb-safe z-50 shadow-lg text-xs">
+        <button onclick="switchView('schedule')" class="flex flex-col items-center w-1/2 py-2 nav-active" id="nav-schedule">
+            <i class="fas fa-calendar-alt text-xl mb-1"></i>
+            <span>每日行程</span>
+        </button>
+        <button onclick="switchView('restaurant')" class="flex flex-col items-center w-1/2 py-2 nav-inactive" id="nav-restaurant">
+            <i class="fas fa-utensils text-xl mb-1"></i>
+            <span>美食餐廳</span>
+        </button>
+    </nav>
+
+    <!-- Floating Action Button for Map (Only on Schedule) -->
+    <a href="https://www.google.com/maps" target="_blank" id="floatMapBtn" class="fixed bottom-20 right-6 bg-red-700 text-white w-12 h-12 rounded-full shadow-xl hover:bg-red-800 transition transform active:scale-95 flex items-center justify-center z-40 opacity-80">
+        <i class="fas fa-map-marked-alt text-lg"></i>
     </a>
 
-    <!-- Removed Install Instruction Modal -->
-
     <script>
+        // ---------------- Data ----------------
         const itinerary = [
             {
-                date: "12/04",
-                day: "週四",
-                city: "Budapest",
+                date: "12/04", day: "週四", city: "Budapest",
                 events: [
                     { time: "13:20", title: "抵達布達佩斯", icon: "fa-train", desc: "抵達 Budapest Keleti 火車站 (由維也納 10:45 出發)", note: "出站後搭地鐵 M2 到 Deák Ferenc tér，再走路 5 分鐘到飯店" },
                     { time: "14:30", title: "Check-in + 簡單休息", icon: "fa-suitcase", desc: "入住 Sas utca 6，整理行李、洗個臉醒腦", note: "飯店就在聖史蒂芬教堂旁，地點超中心" },
@@ -66,9 +86,7 @@
                 ]
             },
             {
-                date: "12/05",
-                day: "週五",
-                city: "Budapest",
+                date: "12/05", day: "週五", city: "Budapest",
                 events: [
                     { time: "09:00", title: "城堡山巡禮", icon: "fa-landmark", desc: "Deák Ferenc tér 搭 16 號公車 → 漁人堡、馬提亞斯教堂、三一廣場", note: "建議上山搭車，下山走路" },
                     { time: "11:00", title: "城堡區咖啡時間", icon: "fa-coffee", desc: "Ruszwurm 甜點店吃蛋糕 + 咖啡", note: "老店，小小一間，人多可改附近其他咖啡館" },
@@ -79,9 +97,7 @@
                 ]
             },
             {
-                date: "12/06",
-                day: "週六",
-                city: "Budapest",
+                date: "12/06", day: "週六", city: "Budapest",
                 events: [
                     { time: "09:00", title: "★ Central Market Hall (中央市場)", icon: "fa-shopping-basket", desc: "逛 1 樓生鮮、2 樓紀念品區，吃 Lángos 當早午餐", note: "週日公休，必排今天；搭 Tram 47/49 或 M3" },
                     { time: "11:30", title: "瓦茨街購物區", icon: "fa-shopping-bag", desc: "逛 Váci utca 步行街與 Fashion Street (Zara/Mango/H&M)", note: "EW 身體不適也能輕鬆逛" },
@@ -93,9 +109,7 @@
                 ]
             },
             {
-                date: "12/07",
-                day: "週日",
-                city: "Budapest",
+                date: "12/07", day: "週日", city: "Budapest",
                 events: [
                     { time: "09:00", title: "★ 塞切尼溫泉 (週日改泡)", icon: "fa-hot-tub", desc: "體驗戶外大池與蒸氣室；週日早上人較少", note: "帶泳衣、毛巾、拖鞋；可租 Locker 或 Cabin" },
                     { time: "11:30", title: "英雄廣場", icon: "fa-monument", desc: "Hősök tere 城市地標，從溫泉步行3分鐘", note: "光線好、照片漂亮" },
@@ -108,9 +122,7 @@
                 ]
             },
             {
-                date: "12/08",
-                day: "週一",
-                city: "Budapest",
+                date: "12/08", day: "週一", city: "Budapest",
                 events: [
                     { time: "09:00", title: "猶太區深度走訪", icon: "fa-synagogue", desc: "Dohány 街會堂 (歐洲最大猶太會堂) → 猶太區街道塗鴉與小店", note: "可提前上網看是否需預約導覽" },
                     { time: "13:00", title: "瓦茨街 & 多瑙河步道", icon: "fa-shopping-bag", desc: "逛 Váci utca 步行街，最後補買伴手禮 → 沿河邊散步回市中心", note: "這天博物館多休，安排購物最安全" },
@@ -118,9 +130,7 @@
                 ]
             },
             {
-                date: "12/09",
-                day: "週二",
-                city: "Bp → Vie",
+                date: "12/09", day: "週二", city: "Bp → Vie",
                 events: [
                     { time: "上午", title: "最後散步 + 收行李", icon: "fa-suitcase", desc: "附近咖啡館吃早餐，隨意在聖史蒂芬教堂周邊走走拍照", note: "預留時間回飯店拿行李" },
                     { time: "13:40", title: "★ 火車前往維也納", icon: "fa-train", desc: "Budapest Keleti 搭 13:40 班次前往 Wien Hbf", note: "建議 13:10 前抵達月台" },
@@ -130,9 +140,7 @@
                 ]
             },
             {
-                date: "12/10",
-                day: "週三",
-                city: "Vienna",
+                date: "12/10", day: "週三", city: "Vienna",
                 events: [
                     { time: "09:00", title: "★ 美泉宮 Schönbrunn", icon: "fa-crown", desc: "參觀宮殿內部 + 後花園 + 山丘 Gloriette 景觀台", note: "從 Hbf 搭 U1 轉 U4 抵達 Schönbrunn 站" },
                     { time: "13:00", title: "美泉宮聖誕市集", icon: "fa-gift", desc: "在宮殿前廣場逛市集、吃熱紅酒與小吃", note: "拍照很好看" },
@@ -141,9 +149,7 @@
                 ]
             },
             {
-                date: "12/11",
-                day: "週四",
-                city: "Vienna",
+                date: "12/11", day: "週四", city: "Vienna",
                 events: [
                     { time: "09:30", title: "藝術史博物館 + 圓頂咖啡館", icon: "fa-university", desc: "參觀 Kunsthistorisches Museum ，館內圓頂咖啡館吃早午餐", note: "從 Hbf 搭 Tram D 直達 Burgring" },
                     { time: "13:00", title: "霍夫堡與國家圖書館", icon: "fa-book", desc: "霍夫堡皇宮外觀、英雄廣場，奧地利國家圖書館內部大廳", note: "都在步行距離內" },
@@ -152,9 +158,7 @@
                 ]
             },
             {
-                date: "12/12",
-                day: "週五",
-                city: "返家",
+                date: "12/12", day: "週五", city: "返家",
                 events: [
                     { time: "07:40", title: "前往機場", icon: "fa-plane-departure", desc: "從 Wien Hbf 搭 Railjet / S7 / CAT 至 VIE 機場", note: "至少預留 3 小時（含通勤＋辦理登機）" },
                     { time: "10:40", title: "CI64 維也納 → 台北", icon: "fa-plane", desc: "辦理登機、出關，準備返台", note: "祝旅途平安順利" }
@@ -162,12 +166,73 @@
             }
         ];
 
+        const restaurants = {
+            budapest: [
+                { name: "Menza Restaurant & Café", type: "午餐/晚餐", price: "$$", rate: "4.4", desc: "匈牙利家常菜、古拉什湯、鴨肉", addr: "1061 Budapest, Liszt Ferenc tér 2" },
+                { name: "KIOSK Budapest", type: "午餐/晚餐", price: "$$-$$$", rate: "4.3", desc: "現代匈牙利菜、燉牛肉、氣氛好", addr: "1056 Budapest, Március 15. tér 4" },
+                { name: "VakVarjú Pest", type: "午餐/晚餐", price: "$$", rate: "4.4", desc: "烤烤爐 Lángos、玫瑰鴨胸、創意菜", addr: "1061 Budapest, Paulay Ede utca 7" },
+                { name: "Kiskakukk Étterem", type: "晚餐首選", price: "$$-$$$", rate: "4.5", desc: "鵝腿、鵝肝、傳統匈牙利湯品", addr: "1137 Budapest, Pozsonyi út 12" },
+                { name: "Hungarikum Bisztró", type: "晚餐備選", price: "$$-$$$", rate: "4.7", desc: "道地匈牙利菜：古拉什、辣椒燉肉", addr: "1051 Budapest, Steindl Imre utca 13" },
+                { name: "Trattoria Pomo D’Oro", type: "晚餐備選", price: "$$-$$$", rate: "4.6", desc: "義大利麵、披薩、燉飯，換口味首選", addr: "1051 Budapest, Arany János utca 9" },
+                { name: "Paprika Vendéglő", type: "午餐熱門", price: "$$", rate: "4.6", desc: "匈牙利牛肉湯、煙囪肉、辣椒燉雞", addr: "1071 Budapest, Dózsa György út 72" },
+                { name: "Városliget Café", type: "午餐備選", price: "$$-$$$", rate: "4.4", desc: "看城市公園湖景，西餐+匈牙利菜", addr: "1146 Budapest, Olof Palme sétány 5" },
+                { name: "Gundel Restaurant", type: "午餐備選", price: "$$$", rate: "4.4", desc: "百年老店，Gundel 煎餅、經典高級菜", addr: "1146 Budapest, Gundel Károly út 4" },
+                { name: "Párisi Passage Café", type: "晚餐", price: "$$$", rate: "4.5", desc: "玻璃穹頂超華麗、現代歐陸料理", addr: "1053 Budapest, Ferenciek tere 10" },
+                { name: "Szimpla Kert", type: "酒吧", price: "$-$$", rate: "4.7", desc: "世界知名廢墟酒吧，主打氣氛與裝潢", addr: "1075 Budapest, Kazinczy utca 14" },
+                { name: "Mazel Tov", type: "晚餐", price: "$$-$$$", rate: "4.5", desc: "中東烤肉、鷹嘴豆泥、花園餐廳", addr: "1072 Budapest, Akácfa utca 47" },
+                { name: "Dobrumba", type: "晚餐", price: "$$", rate: "4.6", desc: "地中海+中東 mezze、小菜、鷹嘴豆泥", addr: "1074 Budapest, Dob utca 5" }
+            ],
+            vienna: [
+                { name: "Salm Bräu", type: "晚餐", price: "$$-$$$", rate: "4.5", desc: "修道院啤酒館風，豬腳、炸豬排、啤酒", addr: "1030 Wien, Rennweg 8" },
+                { name: "Plachutta Wollzeile", type: "晚餐", price: "$$$", rate: "4.5", desc: "招牌 Tafelspitz (清燉牛肉)，非常有名", addr: "1010 Wien, Wollzeile 38" },
+                { name: "Café Central", type: "下午咖啡", price: "$$-$$$", rate: "4.5", desc: "歷史咖啡館，蛋糕、咖啡、內裝超美", addr: "1010 Wien, Herrengasse 14" },
+                { name: "Café Sacher Wien", type: "下午備選", price: "$$-$$$", rate: "4.4", desc: "原創 Sacher-Torte，本人來吃招牌蛋糕", addr: "1010 Wien, Philharmonikerstraße 4" },
+                { name: "Figlmüller Wollzeile", type: "晚餐", price: "$$-$$$", rate: "4.2", desc: "巨大維也納炸豬排，非常有名，建議訂位", addr: "1010 Wien, Wollzeile 5" }
+            ]
+        };
+
         const dateTabs = document.getElementById('dateTabs');
-        const scheduleContainer = document.getElementById('scheduleContainer');
-        const body = document.body;
+        const scheduleContainer = document.getElementById('scheduleView');
+        const restaurantContainer = document.getElementById('restaurantView');
+        const navSchedule = document.getElementById('nav-schedule');
+        const navRestaurant = document.getElementById('nav-restaurant');
+        const floatMapBtn = document.getElementById('floatMapBtn');
 
-        // Removed toggleModal function
+        // ---------------- View Switching Logic ----------------
+        function switchView(viewName) {
+            if (viewName === 'schedule') {
+                scheduleContainer.classList.remove('hidden');
+                restaurantContainer.classList.add('hidden');
+                dateTabs.classList.remove('h-0', 'opacity-0', 'overflow-hidden', 'py-0');
+                dateTabs.classList.add('py-2');
+                floatMapBtn.classList.remove('hidden');
+                
+                navSchedule.classList.add('nav-active');
+                navSchedule.classList.remove('nav-inactive');
+                navRestaurant.classList.remove('nav-active');
+                navRestaurant.classList.add('nav-inactive');
+                
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            } else {
+                scheduleContainer.classList.add('hidden');
+                restaurantContainer.classList.remove('hidden');
+                
+                // Hide Date Tabs smoothly
+                dateTabs.classList.add('h-0', 'opacity-0', 'overflow-hidden', 'py-0');
+                dateTabs.classList.remove('py-2');
+                floatMapBtn.classList.add('hidden');
 
+                navRestaurant.classList.add('nav-active');
+                navRestaurant.classList.remove('nav-inactive');
+                navSchedule.classList.remove('nav-active');
+                navSchedule.classList.add('nav-inactive');
+
+                renderRestaurants();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
+
+        // ---------------- Schedule Rendering ----------------
         function renderTabs(activeIndex) {
             dateTabs.innerHTML = '';
             itinerary.forEach((item, index) => {
@@ -237,10 +302,57 @@
                  <a href="https://www.google.com/search?q=${data.city}+weather+December" target="_blank" class="text-xs text-gray-400 underline">查看當地天氣</a>
             `;
             scheduleContainer.appendChild(searchBtnDiv);
-            
-            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
+        // ---------------- Restaurant Rendering ----------------
+        function renderRestaurants() {
+            if (restaurantContainer.innerHTML.trim() !== "") return; // Avoid re-rendering
+
+            const createRestSection = (title, list) => {
+                let html = `<h2 class="text-xl font-bold text-gray-800 mb-4 pl-2 border-l-4 border-red-600 mt-6">${title}</h2>`;
+                list.forEach(r => {
+                    // Create Google Maps Query URL
+                    const mapQuery = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(r.name + ' ' + r.addr)}`;
+                    
+                    html += `
+                        <div class="bg-white p-4 rounded-xl shadow-sm mb-4 border border-gray-100 flex flex-col relative overflow-hidden">
+                            <div class="flex justify-between items-start mb-2">
+                                <div>
+                                    <h3 class="font-bold text-lg text-gray-800 leading-tight">${r.name}</h3>
+                                    <div class="text-xs text-gray-500 mt-1 flex items-center">
+                                        <span class="bg-red-100 text-red-600 px-2 py-0.5 rounded mr-2">${r.type}</span>
+                                        <span class="mr-2"><i class="fas fa-coins text-yellow-500 text-xs"></i> ${r.price}</span>
+                                        <span><i class="fas fa-star text-yellow-400 text-xs"></i> ${r.rate}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="text-sm text-gray-600 mb-3 line-clamp-2">${r.desc}</p>
+                            
+                            <a href="${mapQuery}" target="_blank" class="mt-auto w-full bg-red-50 text-red-700 py-2 rounded-lg text-center font-medium text-sm hover:bg-red-100 transition flex items-center justify-center">
+                                <i class="fas fa-location-arrow mr-2"></i> 導航去這裡
+                            </a>
+                        </div>
+                    `;
+                });
+                return html;
+            };
+
+            let content = `
+                <div class="mb-4">
+                    <h2 class="text-2xl font-bold text-gray-800 mb-1 pl-2 border-l-4 border-red-600">美食清單</h2>
+                    <p class="text-sm text-gray-500 pl-3">點擊按鈕可直接開啟 Google Maps</p>
+                </div>
+            `;
+            content += createRestSection("🇭🇺 布達佩斯 Budapest", restaurants.budapest);
+            content += createRestSection("🇦🇹 維也納 Vienna", restaurants.vienna);
+            
+            // Add some padding at bottom for nav bar
+            content += `<div class="h-8"></div>`; 
+
+            restaurantContainer.innerHTML = content;
+        }
+
+        // Initialize
         renderTabs(0);
         renderSchedule(0);
 
