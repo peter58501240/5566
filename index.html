@@ -13,11 +13,12 @@
         body { font-family: 'Noto Sans TC', sans-serif; -webkit-tap-highlight-color: transparent; overscroll-behavior-y: none; }
         .day-card { transition: all 0.3s ease; }
         .hidden-content { display: none; }
-        .active-tab { border-bottom: 2px solid #b91c1c; color: #b91c1c; font-weight: bold; }
+        .active-tab { border-bottom: 3px solid #b91c1c; color: #b91c1c; font-weight: 700; background-color: #fef2f2; }
         .scroll-hide::-webkit-scrollbar { display: none; }
         .scroll-hide { -ms-overflow-style: none; scrollbar-width: none; }
         .nav-active { color: #b91c1c; font-weight: bold; }
         .nav-inactive { color: #9ca3af; }
+        .pb-safe { padding-bottom: env(safe-area-inset-bottom); }
     </style>
 </head>
 <body class="bg-gray-50 text-gray-800 pb-24 select-none">
@@ -34,14 +35,14 @@
             </div>
         </div>
         
-        <!-- Date Slider (Only shown in Schedule View) -->
-        <div class="flex overflow-x-auto whitespace-nowrap bg-white border-b scroll-hide px-2 py-2 transition-all duration-300" id="dateTabs">
+        <!-- Date Slider (Always visible now) -->
+        <div class="flex overflow-x-auto whitespace-nowrap bg-white border-b scroll-hide px-2 py-2" id="dateTabs">
             <!-- Tabs will be injected by JS -->
         </div>
     </header>
 
     <!-- Main Content Container -->
-    <main class="container mx-auto px-4 pt-32 max-w-md pb-4 relative">
+    <main class="container mx-auto px-4 pt-32 max-w-md pb-4 relative min-h-screen">
         
         <!-- Schedule View -->
         <div id="scheduleView" class="animate-fade-in">
@@ -49,7 +50,7 @@
         </div>
 
         <!-- Restaurant View -->
-        <div id="restaurantView" class="hidden animate-fade-in pt-2">
+        <div id="restaurantView" class="hidden animate-fade-in">
             <!-- Restaurant list will be injected by JS -->
         </div>
 
@@ -63,12 +64,12 @@
         </button>
         <button onclick="switchView('restaurant')" class="flex flex-col items-center w-1/2 py-2 nav-inactive" id="nav-restaurant">
             <i class="fas fa-utensils text-xl mb-1"></i>
-            <span>美食餐廳</span>
+            <span>當日美食</span>
         </button>
     </nav>
 
     <!-- Floating Action Button for Map (Only on Schedule) -->
-    <a href="https://www.google.com/maps" target="_blank" id="floatMapBtn" class="fixed bottom-20 right-6 bg-red-700 text-white w-12 h-12 rounded-full shadow-xl hover:bg-red-800 transition transform active:scale-95 flex items-center justify-center z-40 opacity-80">
+    <a href="https://www.google.com/maps" target="_blank" id="floatMapBtn" class="fixed bottom-20 right-6 bg-red-700 text-white w-12 h-12 rounded-full shadow-xl hover:bg-red-800 transition transform active:scale-95 flex items-center justify-center z-40 opacity-90">
         <i class="fas fa-map-marked-alt text-lg"></i>
     </a>
 
@@ -78,119 +79,128 @@
             {
                 date: "12/04", day: "週四", city: "Budapest",
                 events: [
-                    { time: "13:20", title: "抵達布達佩斯", icon: "fa-train", desc: "抵達 Budapest Keleti 火車站 (由維也納 10:45 出發)", note: "出站後搭地鐵 M2 到 Deák Ferenc tér，再走路 5 分鐘到飯店" },
-                    { time: "14:30", title: "Check-in + 簡單休息", icon: "fa-suitcase", desc: "入住 Sas utca 6，整理行李、洗個臉醒腦", note: "飯店就在聖史蒂芬教堂旁，地點超中心" },
-                    { time: "16:00", title: "聖史蒂芬教堂 + 聖誕市集", icon: "fa-tree", desc: "教堂廣場逛市集，看教堂外觀、鐘樓 (可上塔看景)", note: "全程步行，晚上再回來也方便" },
-                    { time: "18:00", title: "國會大廈夜景 + 鐵鞋紀念碑", icon: "fa-camera", desc: "走到「多瑙河畔的鞋子」→ 對面拍國會大廈夜景", note: "沿河岸散步回程" },
-                    { time: "19:30", title: "第一晚晚餐", icon: "fa-utensils", desc: "市中心餐廳：① Menza (懷舊匈牙利菜) ② Kiosk (河邊景觀餐廳) ③ VakVarjú", note: "都可現場候位，想保險可前一天線上訂位" }
+                    { time: "13:20", title: "抵達布達佩斯", icon: "fa-train", desc: "抵達 Budapest Keleti 火車站", note: "搭 M2 到 Deák Ferenc tér" },
+                    { time: "14:30", title: "Check-in", icon: "fa-suitcase", desc: "入住 Sas utca 6", note: "聖史蒂芬教堂旁" },
+                    { time: "16:00", title: "聖史蒂芬教堂 + 市集", icon: "fa-tree", desc: "逛市集，看教堂外觀", note: "步行即可" },
+                    { time: "18:00", title: "國會大廈夜景", icon: "fa-camera", desc: "多瑙河畔鞋子 → 拍夜景", note: "沿河岸散步" },
+                    { time: "19:30", title: "晚餐時間", icon: "fa-utensils", desc: "建議前往 Menza 或河邊餐廳", note: "詳見美食分頁" }
+                ],
+                restaurants: [
+                    { name: "Menza Restaurant", type: "晚餐推薦", price: "$$", rate: "4.4", desc: "懷舊風格，匈牙利家常菜、古拉什湯", addr: "1061 Budapest, Liszt Ferenc tér 2" },
+                    { name: "KIOSK Budapest", type: "晚餐推薦", price: "$$-$$$", rate: "4.3", desc: "河邊景觀餐廳，氣氛好，適合第一晚", addr: "1056 Budapest, Március 15. tér 4" },
+                    { name: "VakVarjú Pest", type: "晚餐推薦", price: "$$", rate: "4.4", desc: "氣氛溫馨，有現場鋼琴，烤鴨胸好吃", addr: "1061 Budapest, Paulay Ede utca 7" }
                 ]
             },
             {
                 date: "12/05", day: "週五", city: "Budapest",
                 events: [
-                    { time: "09:00", title: "城堡山巡禮", icon: "fa-landmark", desc: "Deák Ferenc tér 搭 16 號公車 → 漁人堡、馬提亞斯教堂、三一廣場", note: "建議上山搭車，下山走路" },
-                    { time: "11:00", title: "城堡區咖啡時間", icon: "fa-coffee", desc: "Ruszwurm 甜點店吃蛋糕 + 咖啡", note: "老店，小小一間，人多可改附近其他咖啡館" },
-                    { time: "13:00", title: "布達皇宮 + 下山", icon: "fa-walking", desc: "順著皇宮區散步，下山往河邊與鎖鏈橋方向走", note: "中間可找景點拍照" },
-                    { time: "16:30", title: "前往游船碼頭", icon: "fa-ship", desc: "從飯店步行 10-15 分鐘到多瑙河碼頭 (Dock 7-10 一帶)", note: "建議提早 15 分鐘到" },
-                    { time: "17:00", title: "★ 多瑙河遊船", icon: "fa-star", desc: "已訂 17:00 班，邊遊船邊看國會與兩岸夜景", note: "冬天 16:00 後天黑，這時段最漂亮" },
-                    { time: "20:00", title: "★ Essência 晚餐", icon: "fa-wine-glass", desc: "已訂 Essência Restaurant (米其林一星)", note: "就在 Sas utca 上，離飯店超近，不用擔心交通" }
+                    { time: "09:00", title: "城堡山巡禮", icon: "fa-landmark", desc: "漁人堡、馬提亞斯教堂", note: "搭 16 號公車上山" },
+                    { time: "11:00", title: "Ruszwurm 甜點", icon: "fa-coffee", desc: "百年老店吃蛋糕", note: "人多可外帶" },
+                    { time: "17:00", title: "★ 多瑙河遊船", icon: "fa-ship", desc: "已訂位，看夜景", note: "提早15分到碼頭" },
+                    { time: "20:00", title: "★ Essência 晚餐", icon: "fa-wine-glass", desc: "已訂位米其林一星", note: "就在飯店附近" }
+                ],
+                restaurants: [
+                    { name: "Essência Restaurant", type: "★ 已訂位 20:00", price: "$$$$", rate: "4.8", desc: "米其林一星，葡萄牙與匈牙利融合菜", addr: "1051 Budapest, Sas u. 17" },
+                    { name: "Ruszwurm Cukrászda", type: "點心", price: "$$", rate: "4.2", desc: "城堡區百年甜點店，必吃奶油蛋糕", addr: "1014 Budapest, Szentháromság u. 7" }
                 ]
             },
             {
                 date: "12/06", day: "週六", city: "Budapest",
                 events: [
-                    { time: "09:00", title: "★ Central Market Hall (中央市場)", icon: "fa-shopping-basket", desc: "逛 1 樓生鮮、2 樓紀念品區，吃 Lángos 當早午餐", note: "週日公休，必排今天；搭 Tram 47/49 或 M3" },
-                    { time: "11:30", title: "瓦茨街購物區", icon: "fa-shopping-bag", desc: "逛 Váci utca 步行街與 Fashion Street (Zara/Mango/H&M)", note: "EW 身體不適也能輕鬆逛" },
-                    { time: "13:00", title: "午餐 (3選1)", icon: "fa-utensils", desc: "① Menza (復古食堂) ② Kiosk (河景) ③ VakVarjú (氣氛好)", note: "都可現場候位，不需訂位" },
-                    { time: "15:00", title: "自由橋 → 蓋勒特山腳拍照", icon: "fa-camera", desc: "走過自由橋，在蓋勒特山腳拍布達全景 (不用爬山)", note: "輕鬆、不費體力" },
-                    { time: "16:30", title: "聖史蒂芬教堂市集", icon: "fa-tree", desc: "回飯店放東西 → 下樓逛市集 → 看 3D 燈光秀", note: "飯店就在教堂旁，累了馬上回房" },
-                    { time: "19:00", title: "晚餐 (3選1)", icon: "fa-utensils", desc: "① Kiskakukk (鵝腿老店/最好訂位) ② Hungarikum (很熱門) ③ Pomo D’ Oro (義式)", note: "週六建議 Kiskakukk 最保險" },
-                    { time: "21:00", title: "回飯店休息", icon: "fa-bed", desc: "準備隔天泡溫泉", note: "自由安排" }
+                    { time: "09:00", title: "★ 中央市場", icon: "fa-shopping-basket", desc: "逛生鮮、買鵝肝醬，吃 Lángos", note: "搭 Tram 47/49" },
+                    { time: "11:30", title: "瓦茨街購物", icon: "fa-shopping-bag", desc: "Váci utca 步行街", note: "平路好走" },
+                    { time: "13:00", title: "午餐時間", icon: "fa-utensils", desc: "附近隨意吃或參考美食名單", note: "詳見美食分頁" },
+                    { time: "15:00", title: "自由橋拍照", icon: "fa-camera", desc: "橋上拍蓋勒特山景", note: "輕鬆行程" },
+                    { time: "19:00", title: "晚餐時間", icon: "fa-utensils", desc: "建議吃鵝腿或義式料理", note: "詳見美食分頁" }
+                ],
+                restaurants: [
+                    { name: "Menza Restaurant", type: "午餐選項", price: "$$", rate: "4.4", desc: "復古食堂風，推薦蒜頭湯、鴨肉燉飯", addr: "1061 Budapest, Liszt Ferenc tér 2" },
+                    { name: "Kiskakukk Étterem", type: "晚餐首選", price: "$$-$$$", rate: "4.5", desc: "老字號餐廳，鵝腿、鵝肝最有名", addr: "1137 Budapest, Pozsonyi út 12" },
+                    { name: "Hungarikum Bisztró", type: "晚餐備選", price: "$$-$$$", rate: "4.7", desc: "超熱門道地菜，若無訂位需現場排", addr: "1051 Budapest, Steindl Imre utca 13" },
+                    { name: "Trattoria Pomo D’Oro", type: "晚餐備選", price: "$$-$$$", rate: "4.6", desc: "想換口味吃義大利麵、披薩的首選", addr: "1051 Budapest, Arany János utca 9" }
                 ]
             },
             {
                 date: "12/07", day: "週日", city: "Budapest",
                 events: [
-                    { time: "09:00", title: "★ 塞切尼溫泉 (週日改泡)", icon: "fa-hot-tub", desc: "體驗戶外大池與蒸氣室；週日早上人較少", note: "帶泳衣、毛巾、拖鞋；可租 Locker 或 Cabin" },
-                    { time: "11:30", title: "英雄廣場", icon: "fa-monument", desc: "Hősök tere 城市地標，從溫泉步行3分鐘", note: "光線好、照片漂亮" },
-                    { time: "12:00", title: "城市公園 City Park", icon: "fa-tree", desc: "湖畔散步、拍 Vajdahunyad 城堡", note: "週日最適合戶外行程" },
-                    { time: "12:30", title: "午餐 (3選1)", icon: "fa-utensils", desc: "① Paprika (超人氣) ② Városliget Café (湖景) ③ Gundel (百年名店)", note: "Paprika 要排隊；想輕鬆選 Café 或 Gundel" },
-                    { time: "14:30", title: "安德拉什大道 (世界遺產)", icon: "fa-road", desc: "從 Oktogon 沿大道走到歌劇院附近，欣賞建築", note: "週日商店雖關，但街景很美" },
-                    { time: "16:00", title: "恐怖之屋 / 歌劇院 (選擇性)", icon: "fa-building", desc: "恐怖之屋週日有開；歌劇院拍外觀即可", note: "依體力決定是否進館" },
-                    { time: "18:00", title: "★ Párisi Passage Café (晚餐)", icon: "fa-star", desc: "華麗玻璃穹頂，比紐約咖啡館舒服，適合最後一晚", note: "建議預約；也可現場排" },
-                    { time: "20:30", title: "Szimpla Kert 廢墟酒吧", icon: "fa-glass-cheers", desc: "體驗世界有名廢墟酒吧，喝一杯即可", note: "可搭 Bolt 回飯店" }
+                    { time: "09:00", title: "★ 塞切尼溫泉", icon: "fa-hot-tub", desc: "戶外大池體驗", note: "帶泳衣拖鞋" },
+                    { time: "12:30", title: "午餐時間", icon: "fa-utensils", desc: "城市公園附近用餐", note: "詳見美食分頁" },
+                    { time: "14:30", title: "安德拉什大道", icon: "fa-road", desc: "散步看建築", note: "週日商店沒開" },
+                    { time: "18:00", title: "★ Párisi Passage", icon: "fa-star", desc: "華麗拱廊晚餐", note: "建議預約" },
+                    { time: "20:30", title: "廢墟酒吧", icon: "fa-glass-cheers", desc: "Szimpla Kert", note: "喝一杯體驗" }
+                ],
+                restaurants: [
+                    { name: "Paprika Vendéglő", type: "午餐熱門", price: "$$", rate: "4.6", desc: "就在公園旁，匈牙利牛肉湯、紅椒雞", addr: "1071 Budapest, Dózsa György út 72" },
+                    { name: "Városliget Café", type: "午餐備選", price: "$$-$$$", rate: "4.4", desc: "可看溜冰場與城堡景觀，環境舒適", addr: "1146 Budapest, Olof Palme sétány 5" },
+                    { name: "Gundel Restaurant", type: "午餐備選", price: "$$$", rate: "4.4", desc: "百年高級名店，Gundel 煎餅發源地", addr: "1146 Budapest, Gundel Károly út 4" },
+                    { name: "Párisi Passage Café", type: "晚餐", price: "$$$", rate: "4.5", desc: "布達佩斯最美拱廊，氣氛奢華", addr: "1053 Budapest, Ferenciek tere 10" },
+                    { name: "Szimpla Kert", type: "酒吧", price: "$-$$", rate: "4.7", desc: "世界知名廢墟酒吧，必訪景點", addr: "1075 Budapest, Kazinczy utca 14" }
                 ]
             },
             {
                 date: "12/08", day: "週一", city: "Budapest",
                 events: [
-                    { time: "09:00", title: "猶太區深度走訪", icon: "fa-synagogue", desc: "Dohány 街會堂 (歐洲最大猶太會堂) → 猶太區街道塗鴉與小店", note: "可提前上網看是否需預約導覽" },
-                    { time: "13:00", title: "瓦茨街 & 多瑙河步道", icon: "fa-shopping-bag", desc: "逛 Váci utca 步行街，最後補買伴手禮 → 沿河邊散步回市中心", note: "這天博物館多休，安排購物最安全" },
-                    { time: "18:30", title: "猶太區網美餐廳晚餐", icon: "fa-utensils", desc: "① Mazel Tov (花園風中東菜) ② Dobrumba (中東+地中海) ③ Ket Szerecsen", note: "熱門但通常可現場候位，保險起見可簡單訂位" }
+                    { time: "09:00", title: "猶太區散步", icon: "fa-synagogue", desc: "大會堂、塗鴉牆", note: "深度遊覽" },
+                    { time: "13:00", title: "最後採買", icon: "fa-shopping-bag", desc: "瓦茨街買伴手禮", note: "補貨時間" },
+                    { time: "18:30", title: "網美餐廳晚餐", icon: "fa-utensils", desc: "猶太區特色料理", note: "詳見美食分頁" }
+                ],
+                restaurants: [
+                    { name: "Mazel Tov", type: "晚餐熱門", price: "$$-$$$", rate: "4.5", desc: "廢墟風花園餐廳，中東烤肉、鷹嘴豆泥", addr: "1072 Budapest, Akácfa utca 47" },
+                    { name: "Dobrumba", type: "晚餐備選", price: "$$", rate: "4.6", desc: "地中海料理，設計感強，食物清爽", addr: "1074 Budapest, Dob utca 5" },
+                    { name: "Két Szerecsen", type: "晚餐備選", price: "$$-$$$", rate: "4.5", desc: "復古巴黎小酒館風，早午餐晚餐都好吃", addr: "1065 Budapest, Nagymező utca 14" }
                 ]
             },
             {
                 date: "12/09", day: "週二", city: "Bp → Vie",
                 events: [
-                    { time: "上午", title: "最後散步 + 收行李", icon: "fa-suitcase", desc: "附近咖啡館吃早餐，隨意在聖史蒂芬教堂周邊走走拍照", note: "預留時間回飯店拿行李" },
-                    { time: "13:40", title: "★ 火車前往維也納", icon: "fa-train", desc: "Budapest Keleti 搭 13:40 班次前往 Wien Hbf", note: "建議 13:10 前抵達月台" },
-                    { time: "16:20", title: "抵達維也納 + Check-in", icon: "fa-hotel", desc: "抵達 Wien Hbf → 走路 3 分鐘到 Leonardo Hotel Vienna Hauptbahnhof", note: "放好行李稍作休息" },
-                    { time: "18:00", title: "市政廳聖誕市集", icon: "fa-tree", desc: "Rathausplatz 最大聖誕市集：燈海 + 溜冰場", note: "從 Hbf 落 U1 到 Karlsplatz 轉 Tram D" },
-                    { time: "20:00", title: "Salm Bräu 晚餐", icon: "fa-beer", desc: "修道院啤酒＋豬肋排超有名，也有炸豬排與其他德奧菜", note: "可事先訂位，也常有現場位" }
+                    { time: "13:40", title: "★ 火車往維也納", icon: "fa-train", desc: "Keleti 出發", note: "13:10 前到月台" },
+                    { time: "16:20", title: "抵達維也納", icon: "fa-hotel", desc: "入住 Leonardo Hotel", note: "Wien Hbf 旁" },
+                    { time: "18:00", title: "市政廳聖誕市集", icon: "fa-tree", desc: "最大聖誕市集", note: "搭地鐵轉電車" },
+                    { time: "20:00", title: "豬肋排晚餐", icon: "fa-beer", desc: "Salm Bräu", note: "詳見美食分頁" }
+                ],
+                restaurants: [
+                    { name: "Salm Bräu", type: "晚餐", price: "$$-$$$", rate: "4.5", desc: "修道院改建，自釀啤酒、烤豬肋排必點", addr: "1030 Wien, Rennweg 8" }
                 ]
             },
             {
                 date: "12/10", day: "週三", city: "Vienna",
                 events: [
-                    { time: "09:00", title: "★ 美泉宮 Schönbrunn", icon: "fa-crown", desc: "參觀宮殿內部 + 後花園 + 山丘 Gloriette 景觀台", note: "從 Hbf 搭 U1 轉 U4 抵達 Schönbrunn 站" },
-                    { time: "13:00", title: "美泉宮聖誕市集", icon: "fa-gift", desc: "在宮殿前廣場逛市集、吃熱紅酒與小吃", note: "拍照很好看" },
-                    { time: "15:00", title: "美景宮 Belvedere", icon: "fa-palette", desc: "上宮參觀 Klimt《吻》 + 前庭湖景、聖誕市集", note: "從 Schönbrunn 搭車約 30 分鐘到 Belvedere 區" },
-                    { time: "19:00", title: "Plachutta 晚餐", icon: "fa-utensils", desc: "清燉牛肉鍋 Tafelspitz 招牌料理", note: "建議預約；若懶得訂位，可改附近一般餐館或超市買東西回飯店吃" }
+                    { time: "09:00", title: "★ 美泉宮", icon: "fa-crown", desc: "宮殿+花園", note: "U4 Schönbrunn 站" },
+                    { time: "13:00", title: "美泉宮市集", icon: "fa-gift", desc: "吃小吃、喝熱紅酒", note: "午餐市集解決" },
+                    { time: "15:00", title: "美景宮", icon: "fa-palette", desc: "看克林姆《吻》", note: "轉車約30分" },
+                    { time: "19:00", title: "牛肉鍋晚餐", icon: "fa-utensils", desc: "Plachutta", note: "建議預約" }
+                ],
+                restaurants: [
+                    { name: "Plachutta Wollzeile", type: "晚餐", price: "$$$", rate: "4.5", desc: "維也納清燉牛肉鍋 (Tafelspitz) 名店", addr: "1010 Wien, Wollzeile 38" },
+                    { name: "Schönbrunn Market", type: "午餐", price: "$", rate: "4.5", desc: "美泉宮市集攤位，香腸、麵包湯", addr: "Schönbrunn Palace, Vienna" }
                 ]
             },
             {
                 date: "12/11", day: "週四", city: "Vienna",
                 events: [
-                    { time: "09:30", title: "藝術史博物館 + 圓頂咖啡館", icon: "fa-university", desc: "參觀 Kunsthistorisches Museum ，館內圓頂咖啡館吃早午餐", note: "從 Hbf 搭 Tram D 直達 Burgring" },
-                    { time: "13:00", title: "霍夫堡與國家圖書館", icon: "fa-book", desc: "霍夫堡皇宮外觀、英雄廣場，奧地利國家圖書館內部大廳", note: "都在步行距離內" },
-                    { time: "15:30", title: "老城區 & 咖啡館巡禮", icon: "fa-coffee", desc: "從 Graben / Kohlmarkt 逛到史蒂芬大教堂 → ① Café Central ② Café Sacher 二選一喝咖啡吃蛋糕", note: "也可順路逛百貨 Steffl 或 Peek & Cloppenburg" },
-                    { time: "19:00", title: "★ Figlmüller 炸豬排", icon: "fa-utensils", desc: "維也納最有名的巨大炸豬排，建議去 Wollzeile 本店", note: "最好先線上訂位；不想訂位就早點去排隊" }
+                    { time: "09:30", title: "藝術史博物館", icon: "fa-university", desc: "參觀+圓頂咖啡", note: "Tram D 直達" },
+                    { time: "15:30", title: "老城咖啡巡禮", icon: "fa-coffee", desc: "中央咖啡館 / Sacher", note: "排隊名店" },
+                    { time: "19:00", title: "★ 炸豬排晚餐", icon: "fa-utensils", desc: "Figlmüller 本店", note: "必吃巨大豬排" }
+                ],
+                restaurants: [
+                    { name: "Café Central", type: "下午茶", price: "$$-$$$", rate: "4.5", desc: "世界最美咖啡館之一，皇帝煎餅、咖啡", addr: "1010 Wien, Herrengasse 14" },
+                    { name: "Café Sacher Wien", type: "下午茶", price: "$$-$$$", rate: "4.4", desc: "Sacher 飯店樓下，正宗薩赫蛋糕", addr: "1010 Wien, Philharmonikerstraße 4" },
+                    { name: "Figlmüller Wollzeile", type: "晚餐", price: "$$-$$$", rate: "4.2", desc: "比臉大炸豬排始祖，務必先訂位", addr: "1010 Wien, Wollzeile 5" }
                 ]
             },
             {
                 date: "12/12", day: "週五", city: "返家",
                 events: [
-                    { time: "07:40", title: "前往機場", icon: "fa-plane-departure", desc: "從 Wien Hbf 搭 Railjet / S7 / CAT 至 VIE 機場", note: "至少預留 3 小時（含通勤＋辦理登機）" },
-                    { time: "10:40", title: "CI64 維也納 → 台北", icon: "fa-plane", desc: "辦理登機、出關，準備返台", note: "祝旅途平安順利" }
+                    { time: "07:40", title: "前往機場", icon: "fa-plane-departure", desc: "Wien Hbf → VIE", note: "搭 Railjet" },
+                    { time: "10:40", title: "CI64 飛台北", icon: "fa-plane", desc: "平安回家", note: "See you next time" }
+                ],
+                restaurants: [
+                    { name: "機場餐飲", type: "早餐", price: "$$-$$$", rate: "N/A", desc: "維也納機場內輕食或貴賓室", addr: "Vienna International Airport" }
                 ]
             }
         ];
 
-        const restaurants = {
-            budapest: [
-                { name: "Menza Restaurant & Café", type: "午餐/晚餐", price: "$$", rate: "4.4", desc: "匈牙利家常菜、古拉什湯、鴨肉", addr: "1061 Budapest, Liszt Ferenc tér 2" },
-                { name: "KIOSK Budapest", type: "午餐/晚餐", price: "$$-$$$", rate: "4.3", desc: "現代匈牙利菜、燉牛肉、氣氛好", addr: "1056 Budapest, Március 15. tér 4" },
-                { name: "VakVarjú Pest", type: "午餐/晚餐", price: "$$", rate: "4.4", desc: "烤烤爐 Lángos、玫瑰鴨胸、創意菜", addr: "1061 Budapest, Paulay Ede utca 7" },
-                { name: "Kiskakukk Étterem", type: "晚餐首選", price: "$$-$$$", rate: "4.5", desc: "鵝腿、鵝肝、傳統匈牙利湯品", addr: "1137 Budapest, Pozsonyi út 12" },
-                { name: "Hungarikum Bisztró", type: "晚餐備選", price: "$$-$$$", rate: "4.7", desc: "道地匈牙利菜：古拉什、辣椒燉肉", addr: "1051 Budapest, Steindl Imre utca 13" },
-                { name: "Trattoria Pomo D’Oro", type: "晚餐備選", price: "$$-$$$", rate: "4.6", desc: "義大利麵、披薩、燉飯，換口味首選", addr: "1051 Budapest, Arany János utca 9" },
-                { name: "Paprika Vendéglő", type: "午餐熱門", price: "$$", rate: "4.6", desc: "匈牙利牛肉湯、煙囪肉、辣椒燉雞", addr: "1071 Budapest, Dózsa György út 72" },
-                { name: "Városliget Café", type: "午餐備選", price: "$$-$$$", rate: "4.4", desc: "看城市公園湖景，西餐+匈牙利菜", addr: "1146 Budapest, Olof Palme sétány 5" },
-                { name: "Gundel Restaurant", type: "午餐備選", price: "$$$", rate: "4.4", desc: "百年老店，Gundel 煎餅、經典高級菜", addr: "1146 Budapest, Gundel Károly út 4" },
-                { name: "Párisi Passage Café", type: "晚餐", price: "$$$", rate: "4.5", desc: "玻璃穹頂超華麗、現代歐陸料理", addr: "1053 Budapest, Ferenciek tere 10" },
-                { name: "Szimpla Kert", type: "酒吧", price: "$-$$", rate: "4.7", desc: "世界知名廢墟酒吧，主打氣氛與裝潢", addr: "1075 Budapest, Kazinczy utca 14" },
-                { name: "Mazel Tov", type: "晚餐", price: "$$-$$$", rate: "4.5", desc: "中東烤肉、鷹嘴豆泥、花園餐廳", addr: "1072 Budapest, Akácfa utca 47" },
-                { name: "Dobrumba", type: "晚餐", price: "$$", rate: "4.6", desc: "地中海+中東 mezze、小菜、鷹嘴豆泥", addr: "1074 Budapest, Dob utca 5" }
-            ],
-            vienna: [
-                { name: "Salm Bräu", type: "晚餐", price: "$$-$$$", rate: "4.5", desc: "修道院啤酒館風，豬腳、炸豬排、啤酒", addr: "1030 Wien, Rennweg 8" },
-                { name: "Plachutta Wollzeile", type: "晚餐", price: "$$$", rate: "4.5", desc: "招牌 Tafelspitz (清燉牛肉)，非常有名", addr: "1010 Wien, Wollzeile 38" },
-                { name: "Café Central", type: "下午咖啡", price: "$$-$$$", rate: "4.5", desc: "歷史咖啡館，蛋糕、咖啡、內裝超美", addr: "1010 Wien, Herrengasse 14" },
-                { name: "Café Sacher Wien", type: "下午備選", price: "$$-$$$", rate: "4.4", desc: "原創 Sacher-Torte，本人來吃招牌蛋糕", addr: "1010 Wien, Philharmonikerstraße 4" },
-                { name: "Figlmüller Wollzeile", type: "晚餐", price: "$$-$$$", rate: "4.2", desc: "巨大維也納炸豬排，非常有名，建議訂位", addr: "1010 Wien, Wollzeile 5" }
-            ]
-        };
-
+        let activeDayIndex = 0;
         const dateTabs = document.getElementById('dateTabs');
         const scheduleContainer = document.getElementById('scheduleView');
         const restaurantContainer = document.getElementById('restaurantView');
@@ -203,43 +213,42 @@
             if (viewName === 'schedule') {
                 scheduleContainer.classList.remove('hidden');
                 restaurantContainer.classList.add('hidden');
-                dateTabs.classList.remove('h-0', 'opacity-0', 'overflow-hidden', 'py-0');
-                dateTabs.classList.add('py-2');
                 floatMapBtn.classList.remove('hidden');
                 
                 navSchedule.classList.add('nav-active');
                 navSchedule.classList.remove('nav-inactive');
                 navRestaurant.classList.remove('nav-active');
                 navRestaurant.classList.add('nav-inactive');
-                
-                window.scrollTo({ top: 0, behavior: 'smooth' });
             } else {
                 scheduleContainer.classList.add('hidden');
                 restaurantContainer.classList.remove('hidden');
-                
-                // Hide Date Tabs smoothly
-                dateTabs.classList.add('h-0', 'opacity-0', 'overflow-hidden', 'py-0');
-                dateTabs.classList.remove('py-2');
                 floatMapBtn.classList.add('hidden');
 
                 navRestaurant.classList.add('nav-active');
                 navRestaurant.classList.remove('nav-inactive');
                 navSchedule.classList.remove('nav-active');
                 navSchedule.classList.add('nav-inactive');
-
-                renderRestaurants();
-                window.scrollTo({ top: 0, behavior: 'smooth' });
             }
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // ---------------- Schedule Rendering ----------------
-        function renderTabs(activeIndex) {
+        // ---------------- Rendering Logic ----------------
+        function renderAll(index) {
+            activeDayIndex = index;
+            renderTabs();
+            renderSchedule(index);
+            renderRestaurants(index);
+        }
+
+        function renderTabs() {
             dateTabs.innerHTML = '';
             itinerary.forEach((item, index) => {
                 const btn = document.createElement('button');
-                btn.className = `px-4 py-2 mx-1 text-sm whitespace-nowrap rounded-t-lg transition-colors ${
-                    index === activeIndex 
-                    ? 'active-tab bg-red-50 text-red-700' 
+                const isActive = index === activeDayIndex;
+                
+                btn.className = `px-4 py-2 mx-1 text-sm whitespace-nowrap rounded-t-lg transition-all duration-200 ${
+                    isActive 
+                    ? 'active-tab' 
                     : 'text-gray-500 hover:text-red-600'
                 }`;
                 btn.innerHTML = `
@@ -247,8 +256,7 @@
                     <div class="text-xs">${item.day}</div>
                 `;
                 btn.onclick = () => {
-                    renderSchedule(index);
-                    renderTabs(index);
+                    renderAll(index);
                     btn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
                 };
                 dateTabs.appendChild(btn);
@@ -296,6 +304,7 @@
                 scheduleContainer.appendChild(card);
             });
             
+            // Weather Link
             const searchBtnDiv = document.createElement('div');
             searchBtnDiv.className = "mt-6 mb-10 text-center";
             searchBtnDiv.innerHTML = `
@@ -304,17 +313,22 @@
             scheduleContainer.appendChild(searchBtnDiv);
         }
 
-        // ---------------- Restaurant Rendering ----------------
-        function renderRestaurants() {
-            if (restaurantContainer.innerHTML.trim() !== "") return; // Avoid re-rendering
+        function renderRestaurants(index) {
+            const data = itinerary[index];
+            let content = `
+                <div class="mb-4">
+                    <h2 class="text-2xl font-bold text-gray-800 mb-1 pl-2 border-l-4 border-red-600">
+                        ${data.date} 美食地圖
+                    </h2>
+                    <p class="text-sm text-gray-500 pl-3">當日推薦餐廳 (點擊導航)</p>
+                </div>
+            `;
 
-            const createRestSection = (title, list) => {
-                let html = `<h2 class="text-xl font-bold text-gray-800 mb-4 pl-2 border-l-4 border-red-600 mt-6">${title}</h2>`;
-                list.forEach(r => {
-                    // Create Google Maps Query URL
+            if (data.restaurants && data.restaurants.length > 0) {
+                data.restaurants.forEach(r => {
                     const mapQuery = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(r.name + ' ' + r.addr)}`;
                     
-                    html += `
+                    content += `
                         <div class="bg-white p-4 rounded-xl shadow-sm mb-4 border border-gray-100 flex flex-col relative overflow-hidden">
                             <div class="flex justify-between items-start mb-2">
                                 <div>
@@ -334,27 +348,21 @@
                         </div>
                     `;
                 });
-                return html;
-            };
-
-            let content = `
-                <div class="mb-4">
-                    <h2 class="text-2xl font-bold text-gray-800 mb-1 pl-2 border-l-4 border-red-600">美食清單</h2>
-                    <p class="text-sm text-gray-500 pl-3">點擊按鈕可直接開啟 Google Maps</p>
-                </div>
-            `;
-            content += createRestSection("🇭🇺 布達佩斯 Budapest", restaurants.budapest);
-            content += createRestSection("🇦🇹 維也納 Vienna", restaurants.vienna);
+            } else {
+                content += `
+                    <div class="text-center py-10 text-gray-400">
+                        <i class="fas fa-utensils text-4xl mb-3"></i>
+                        <p>本日無特定推薦餐廳<br>可參考行程中的自由覓食時間</p>
+                    </div>
+                `;
+            }
             
-            // Add some padding at bottom for nav bar
-            content += `<div class="h-8"></div>`; 
-
+            content += `<div class="h-8"></div>`;
             restaurantContainer.innerHTML = content;
         }
 
         // Initialize
-        renderTabs(0);
-        renderSchedule(0);
+        renderAll(0);
 
     </script>
 </body>
