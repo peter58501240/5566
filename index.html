@@ -86,7 +86,7 @@
     </a>
 
     <script>
-        // ---------------- Data ----------------
+        // ---------------- Data (Synced with Latest Excel & Verified Addresses) ----------------
         const itinerary = [
             {
                 date: "12/04", day: "週四", city: "Budapest",
@@ -104,14 +104,14 @@
             {
                 date: "12/05", day: "週五", city: "Budapest",
                 events: [
-                    { time: "09:00", title: "城堡山 (公車上山)", icon: "fa-bus", desc: "從 Clark Ádám tér 搭 16 號公車上山", note: "避開 10 點後人潮" },
-                    { time: "09:30", title: "布達王宮 + 眺望", icon: "fa-camera", desc: "外觀、廣場散步、眺望多瑙河全景", note: "如遇風大可縮短停留" },
-                    { time: "10:00", title: "馬加什教堂", icon: "fa-church", desc: "拍彩色屋頂 (可選購票入內)", note: "現場買票即可" },
-                    { time: "10:30", title: "漁人堡", icon: "fa-chess-rook", desc: "童話風格觀景台，拍照最佳點", note: "一樓免費，二樓需票" },
-                    { time: "12:00", title: "午餐: 城堡區 3 選 1", icon: "fa-utensils", desc: "Baltazar / Ramazuri / Jamie’s", note: "詳見美食分頁" },
-                    { time: "14:00", title: "纜車下山 + 鎖鏈橋", icon: "fa-tram", desc: "搭纜車下山，步行過鎖鏈橋", note: "欣賞多瑙河景" },
-                    { time: "16:00", title: "多瑙河畔鞋子", icon: "fa-shoe-prints", desc: "鐵鞋紀念碑拍照", note: "沿河岸散步" },
-                    { time: "18:00", title: "晚餐: Essência", icon: "fa-utensils", desc: "葡萄牙×匈牙利米其林餐廳", note: "建議預約" }
+                    { time: "09:00", title: "城堡山 (直接上山)", icon: "fa-walking", desc: "步行過鎖鏈橋；從 Clark Ádám tér 搭 16 號公車上山", note: "避開 10 點後旅行團人潮；天氣好時拍多瑙河＋國會大廈全景" },
+                    { time: "09:30", title: "布達王宮", icon: "fa-camera", desc: "外觀、廣場散步、眺望多瑙河", note: "此段拍照點多；如遇風大可縮短停留" },
+                    { time: "10:00", title: "馬加什教堂", icon: "fa-church", desc: "可入內參觀或只看外觀", note: "入場可現場買票；拍彩色屋頂" },
+                    { time: "10:30", title: "漁人堡", icon: "fa-chess-rook", desc: "布達佩斯最經典觀景台", note: "從馬加什教堂步行約 2 分鐘；建議先拍無人拱門" },
+                    { time: "12:30", title: "午餐 (3選1)", icon: "fa-utensils", desc: "Baltazar Grill / Ramazuri / Jamie’s Italian", note: "皆在附近；依體力與排隊狀況決定" },
+                    { time: "下午", title: "回佩斯區休息", icon: "fa-bed", desc: "回飯店補眠、整理、暖身", note: "可搭公車下山或步行走回鎖鏈橋；避免晚上遊船過於疲累" },
+                    { time: "17:00", title: "多瑙河夜遊船", icon: "fa-ship", desc: "17:00–18:15 遊船欣賞城堡山 + 國會夜景", note: "建議 16:50 抵達碼頭排隊；帶外套保暖" },
+                    { time: "20:00", title: "Essência 米其林晚餐", icon: "fa-utensils", desc: "葡萄牙 × 匈牙利創意料理 (已訂位)", note: "建議 19:40 出發；晚餐後可散步回飯店" }
                 ],
                 restaurants: [
                     { name: "Baltazar Grill", type: "午餐選項", price: "€20–35", rate: "4.4", desc: "城堡區最穩的餐廳、好訂位", addr: "1014 Budapest, Országház u. 31", url: "https://maps.app.goo.gl/Uc8uJ7X5WpAKZ9eR8" },
@@ -125,8 +125,7 @@
                 events: [
                     { time: "09:00", title: "★ 中央市場", icon: "fa-shopping-basket", desc: "逛生鮮、買鵝肝醬，吃 Lángos", note: "週日公休必排今天" },
                     { time: "10:45", title: "Centrál Grand Cafe", icon: "fa-coffee", desc: "百年歷史咖啡館，裝潢復古華麗", note: "從市場步行約 8 分鐘" },
-                    { time: "11:45", title: "★ Nanushka 旗艦店", icon: "fa-tshirt", desc: "匈牙利國寶設計品牌，店美必逛", note: "Fashion Street 旁" },
-                    { time: "12:30", title: "瓦茨街購物", icon: "fa-shopping-bag", desc: "喝完咖啡順路逛 Váci utca 步行街", note: "一路逛往市中心" },
+                    { time: "12:00", title: "瓦茨街購物", icon: "fa-shopping-bag", desc: "喝完咖啡順路逛 Váci utca 步行街", note: "一路逛往市中心" },
                     { time: "13:30", title: "午餐 3 選 1", icon: "fa-utensils", desc: "① Menza ② Kiosk ③ VakVarjú", note: "都可現場候位" },
                     { time: "15:30", title: "自由橋 + 蓋勒特山腳", icon: "fa-bridge", desc: "走過自由橋，山腳拍全景 (不用爬山)", note: "輕鬆不費體力" },
                     { time: "17:00", title: "聖史蒂芬教堂市集", icon: "fa-gift", desc: "買小物、看 3D 燈光秀", note: "累了可馬上回房" },
@@ -135,7 +134,7 @@
                 restaurants: [
                     { name: "Centrál Grand Cafe", type: "早午餐/咖啡", price: "€10–18", rate: "4.3", desc: "歷史咖啡館、文人聚集地", addr: "1053 Budapest, Károlyi u. 9" },
                     
-                    // Asian Options (Updated)
+                    // Asian Options
                     { name: "Pho-Astoria Bistro", type: "亞洲風味(Pho)", price: "€8–15", rate: "4.8", desc: "評價極高越南河粉，Astoria站旁", addr: "1053 Budapest, Kossuth Lajos u. 6" },
                     { name: "Moon Food & Bar", type: "亞洲風味(Pho)", price: "€8–12", rate: "5.0", desc: "瓦茨街南段小巷，滿分小店", addr: "1056 Budapest, Irányi u. 27" },
                     { name: "Quán Nón Budapest", type: "亞洲風味(越)", price: "€10–18", rate: "4.4", desc: "市中心便利選擇，口味正宗", addr: "1051 Budapest, Erzsébet tér 1" },
@@ -181,14 +180,17 @@
             {
                 date: "12/08", day: "週一", city: "Budapest",
                 events: [
-                    { time: "09:00", title: "猶太區深度遊", icon: "fa-synagogue", desc: "Dohány 街會堂 (外觀/入內)", note: "充滿歷史氛圍" },
-                    { time: "10:30", title: "Gozsdu Udvar", icon: "fa-store", desc: "文創聚落，充滿塗鴉與小店", note: "適合拍照" },
-                    { time: "早餐/早午餐", title: "New York Café", icon: "fa-coffee", desc: "世界最美咖啡館 (需預約)", note: "體驗宮廷奢華感" },
-                    { time: "15:00", title: "瓦茨街補貨", icon: "fa-shopping-bag", desc: "最後伴手禮採買", note: "超市/藥妝店" },
-                    { time: "18:30", title: "晚餐 3 選 1", icon: "fa-utensils", desc: "Mazel Tov / Dobrumba / Két Szerecsen", note: "中東/地中海特色菜" }
+                    { time: "09:00", title: "★ New York Café", icon: "fa-coffee", desc: "週一排隊較少；享受宮殿級早午餐", note: "建議 08:50 抵達；可能排 20–60 分鐘" },
+                    { time: "12:00", title: "猶太區散策", icon: "fa-synagogue", desc: "步行至 Dohány Street Synagogue 周邊逛街", note: "從咖啡館步行 7–10 分；可拍照牆面與小店" },
+                    { time: "13:30", title: "聖史蒂芬大教堂登頂", icon: "fa-archway", desc: "搭電梯登頂觀看布達佩斯全景；可順便看內部", note: "飯店旁；天氣好是最佳登頂時間" },
+                    { time: "15:30", title: "安德拉什大道咖啡", icon: "fa-coffee", desc: "找附近咖啡館休息 (Callas / Művész)", note: "提升腳力；維持下午輕鬆節奏" },
+                    { time: "18:30", title: "晚餐 3 選 1", icon: "fa-utensils", desc: "Mazel Tov / Dobrumba / Ket Szerecsen", note: "主推 Mazel Tov；Dobrumba 最美味" },
+                    { time: "20:30", title: "廢墟酒吧或散步", icon: "fa-glass-cheers", desc: "若前一日已訪可略過；可在猶太區街道散步", note: "自由收尾" }
                 ],
                 restaurants: [
-                    { name: "New York Café", type: "早餐/午茶", price: "€15–30", rate: "4.0", desc: "排隊名店；內裝最華麗", addr: "1073 Budapest, Erzsébet krt. 9–11" },
+                    { name: "New York Café", type: "早午餐", price: "€15–30", rate: "4.0", desc: "排隊名店；內裝最華麗", addr: "1073 Budapest, Erzsébet krt. 9–11" },
+                    { name: "Callas Café & Restaurant", type: "下午茶", price: "€10–20", rate: "4.3", desc: "歌劇院旁，環境典雅", addr: "1061 Budapest, Andrássy út 20" },
+                    { name: "Művész Kávéház", type: "下午茶", price: "€8–15", rate: "4.4", desc: "傳統藝術家咖啡館", addr: "1061 Budapest, Andrássy út 29" },
                     { name: "Mazel Tov", type: "晚餐選項", price: "€20–30", rate: "4.5", desc: "中東網美餐廳、氣氛很好", addr: "1072 Budapest, Akácfa u. 47" },
                     { name: "Dobrumba", type: "晚餐選項", price: "€15–25", rate: "4.6", desc: "地中海小菜超好吃", addr: "1074 Budapest, Dob u. 5" },
                     { name: "Két Szerecsen", type: "晚餐選項", price: "€18–28", rate: "4.5", desc: "較不排隊、品質穩定", addr: "1065 Budapest, Nagymező u. 14" }
@@ -253,7 +255,7 @@
             }
         ];
 
-        // ---------------- Supermarket Data ----------------
+        // ---------------- Supermarket Data (Synced with User Request) ----------------
         const asianSupermarkets = [
             // ---------------- Budapest ----------------
             {
@@ -477,7 +479,7 @@
             if (data.restaurants && data.restaurants.length > 0) {
                 data.restaurants.forEach(r => {
                     // Use Search Query for robustness
-                    const mapQuery = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(r.name + ' ' + r.addr)}`;
+                    const mapQuery = r.url && r.url.startsWith('http') ? r.url : `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(r.name + ' ' + r.addr)}`;
                     
                     content += `
                         <div class="bg-white p-4 rounded-xl shadow-sm mb-4 border border-gray-100 flex flex-col relative overflow-hidden">
