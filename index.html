@@ -44,7 +44,6 @@
     </header>
 
     <!-- Main Content Container -->
-    <!-- 增加 pt-44 以避免被 Header 遮擋 -->
     <main class="container mx-auto px-4 pt-44 max-w-md pb-4 relative min-h-screen">
         
         <!-- Schedule View -->
@@ -86,19 +85,20 @@
     </a>
 
     <script>
-        // ---------------- Data (Synced with Latest Excel & Verified Addresses) ----------------
+        // ---------------- Data ----------------
         const itinerary = [
             {
-                date: "12/04", day: "週四", city: "Budapest",
+                date: "12/04", day: "週四", city: "移動日",
                 events: [
-                    { time: "抵達", title: "入住 & 放行李", icon: "fa-suitcase", desc: "抵達後入住飯店、休息調時差", note: "飯店出門即達教堂" },
+                    { time: "06:50", title: "抵達維也納機場", icon: "fa-plane-arrival", desc: "VIE 抵達後入境、領行李", note: "建議買 OBB 或 CAT/S7 票" },
+                    { time: "10:45", title: "火車往布達佩斯", icon: "fa-train", desc: "維也納 Hbf → Budapest Keleti (約 2.5 小時)", note: "13:20 抵達" },
+                    { time: "14:00", title: "Check-in", icon: "fa-suitcase", desc: "Sas utca 6 飯店，位置在聖史蒂芬大教堂旁", note: "走路兩分鐘到教堂" },
                     { time: "晚間", title: "聖史蒂芬教堂市集", icon: "fa-tree", desc: "下樓就是市集；逛逛喝熱紅酒", note: "第一天保持輕鬆節奏" },
-                    { time: "晚餐", title: "晚餐 3 選 1", icon: "fa-utensils", desc: "詳見美食分頁：Pomo D’Oro / Aszú / Zeller", note: "建議挑選一間前往" }
+                    { time: "晚餐", title: "晚餐 2 選 1", icon: "fa-utensils", desc: "詳見美食分頁：Pomo D’Oro / Aszú", note: "建議挑選一間前往" }
                 ],
                 restaurants: [
-                    { name: "Pomo D’Oro", type: "晚餐選項", price: "€20–35", rate: "4.6", desc: "義式料理、飯店附近、好吃穩定", addr: "1051 Budapest, Arany János u. 9", url: "https://maps.app.goo.gl/8nB2xM4Z2xKn7K1A7" },
-                    { name: "Aszú Étterem", type: "晚餐選項", price: "€25–45", rate: "4.5", desc: "高級匈牙利料理、氣氛好", addr: "1051 Budapest, Sas u. 4", url: "https://maps.app.goo.gl/q7TgC2Y6FdbPR8jG7" },
-                    { name: "Zeller Bistro", type: "晚餐選項", price: "€20–35", rate: "4.6", desc: "人氣餐廳、溫馨小酒館 (已搬新址)", addr: "1077 Budapest, Izabella u. 36-38" }
+                    { name: "Pomo D’Oro", type: "晚餐選項", price: "€20–35", rate: "4.6", desc: "義式料理、飯店附近、好吃穩定", addr: "1051 Budapest, Arany János u. 9", url: "https://www.google.com/maps/search/?api=1&query=Trattoria+Pomo+D'Oro+Budapest" },
+                    { name: "Aszú Étterem", type: "晚餐選項", price: "€25–45", rate: "4.5", desc: "高級匈牙利料理、氣氛好", addr: "1051 Budapest, Sas u. 4", url: "https://www.google.com/maps/search/?api=1&query=Aszu+Etterem+Budapest" }
                 ]
             },
             {
@@ -108,16 +108,16 @@
                     { time: "09:30", title: "布達王宮", icon: "fa-camera", desc: "外觀、廣場散步、眺望多瑙河", note: "此段拍照點多；如遇風大可縮短停留" },
                     { time: "10:00", title: "馬加什教堂", icon: "fa-church", desc: "可入內參觀或只看外觀", note: "入場可現場買票；拍彩色屋頂" },
                     { time: "10:30", title: "漁人堡", icon: "fa-chess-rook", desc: "布達佩斯最經典觀景台", note: "從馬加什教堂步行約 2 分鐘；建議先拍無人拱門" },
-                    { time: "12:30", title: "午餐 (3選1)", icon: "fa-utensils", desc: "Baltazar Grill / Ramazuri / Jamie’s Italian", note: "皆在附近；依體力與排隊狀況決定" },
+                    { time: "12:30", title: "午餐 (3選1)", icon: "fa-utensils", desc: "Baltazar / Ramazuri / Jamie’s Italian", note: "皆在附近；依體力與排隊狀況決定" },
                     { time: "下午", title: "回佩斯區休息", icon: "fa-bed", desc: "回飯店補眠、整理、暖身", note: "可搭公車下山或步行走回鎖鏈橋；避免晚上遊船過於疲累" },
                     { time: "17:00", title: "多瑙河夜遊船", icon: "fa-ship", desc: "17:00–18:15 遊船欣賞城堡山 + 國會夜景", note: "建議 16:50 抵達碼頭排隊；帶外套保暖" },
                     { time: "20:00", title: "Essência 米其林晚餐", icon: "fa-utensils", desc: "葡萄牙 × 匈牙利創意料理 (已訂位)", note: "建議 19:40 出發；晚餐後可散步回飯店" }
                 ],
                 restaurants: [
-                    { name: "Baltazar Grill", type: "午餐選項", price: "€20–35", rate: "4.4", desc: "城堡區最穩的餐廳、好訂位", addr: "1014 Budapest, Országház u. 31", url: "https://maps.app.goo.gl/Uc8uJ7X5WpAKZ9eR8" },
-                    { name: "Ramazuri", type: "午餐選項", price: "€18–30", rate: "4.5", desc: "創意料理、氣氛輕鬆", addr: "1014 Budapest, Úri u. 30", url: "https://maps.app.goo.gl/6n4BMqKMQD9Z6jtH8" },
-                    { name: "Jamie’s Italian", type: "午餐選項", price: "€18–28", rate: "4.2", desc: "義大利連鎖品牌、口味穩", addr: "1014 Budapest, Szentháromság u. 9-11" },
-                    { name: "Essência Restaurant", type: "晚餐", price: "€60–90", rate: "4.8", desc: "葡萄牙×匈牙利米其林餐廳", addr: "1051 Budapest, Sas u. 17" }
+                    { name: "Baltazar Grill", type: "午餐選項", price: "€20–35", rate: "4.4", desc: "城堡區最穩的餐廳、好訂位", addr: "1014 Budapest, Országház u. 31", url: "https://www.google.com/maps/search/?api=1&query=Baltazar+Grill+Budapest" },
+                    { name: "Ramazuri", type: "午餐選項", price: "€18–30", rate: "4.5", desc: "創意料理、氣氛輕鬆", addr: "1014 Budapest, Úri u. 30", url: "https://www.google.com/maps/search/?api=1&query=Ramazuri+Bistronomy+Budapest" },
+                    { name: "Jamie Oliver's Italian Buda Castle", type: "午餐選項", price: "€18–28", rate: "4.2", desc: "義大利連鎖品牌、口味穩", addr: "1014 Budapest, Szentháromság u. 9-11", url: "https://www.google.com/maps/search/?api=1&query=Jamie+Oliver's+Italian+Buda+Castle" },
+                    { name: "Essência Restaurant", type: "晚餐", price: "€60–90", rate: "4.8", desc: "葡萄牙×匈牙利米其林餐廳", addr: "1051 Budapest, Sas u. 17", url: "https://www.google.com/maps/search/?api=1&query=Essência+Restaurant+Budapest" }
                 ]
             },
             {
@@ -132,29 +132,29 @@
                     { time: "19:00", title: "晚餐", icon: "fa-utensils", desc: "西式/匈牙利菜 或 亞洲熱食", note: "週六建議預約" }
                 ],
                 restaurants: [
-                    { name: "Centrál Grand Cafe", type: "早午餐/咖啡", price: "€10–18", rate: "4.3", desc: "歷史咖啡館、文人聚集地", addr: "1053 Budapest, Károlyi u. 9" },
+                    { name: "Centrál Grand Cafe", type: "早午餐/咖啡", price: "€10–18", rate: "4.3", desc: "歷史咖啡館、文人聚集地", addr: "1053 Budapest, Károlyi u. 9", url: "https://www.google.com/maps/search/?api=1&query=Central+Grand+Cafe+Budapest" },
                     
                     // Asian Options
-                    { name: "Pho-Astoria Bistro", type: "亞洲風味(Pho)", price: "€8–15", rate: "4.8", desc: "評價極高越南河粉，Astoria站旁", addr: "1053 Budapest, Kossuth Lajos u. 6" },
-                    { name: "Moon Food & Bar", type: "亞洲風味(Pho)", price: "€8–12", rate: "5.0", desc: "瓦茨街南段小巷，滿分小店", addr: "1056 Budapest, Irányi u. 27" },
-                    { name: "Quán Nón Budapest", type: "亞洲風味(越)", price: "€10–18", rate: "4.4", desc: "市中心便利選擇，口味正宗", addr: "1051 Budapest, Erzsébet tér 1" },
-                    { name: "The Gangnam", type: "亞洲風味(韓)", price: "€15–25", rate: "4.4", desc: "同事飯店同條街，道地韓式料理", addr: "1051 Budapest, Sas u 25" },
-                    { name: "Nanum", type: "亞洲風味(韓)", price: "€15–25", rate: "4.8", desc: "溫馨韓式家庭料理，需走一小段", addr: "1077 Budapest, Király u. 53" },
-                    { name: "Kpub Korean Street Food", type: "亞洲風味(韓)", price: "€10–20", rate: "4.7", desc: "韓式街頭小吃，炸雞、年糕，氣氛熱鬧", addr: "1074 Budapest, Dohány u. 28" },
+                    { name: "Pho-Astoria Bistro", type: "亞洲風味(Pho)", price: "€8–15", rate: "4.8", desc: "評價極高越南河粉，Astoria站旁", addr: "1053 Budapest, Kossuth Lajos u. 6", url: "https://www.google.com/maps/search/?api=1&query=Pho-Astoria+Bistro+Budapest" },
+                    { name: "Moon Food & Bar", type: "亞洲風味(Pho)", price: "€8–12", rate: "5.0", desc: "瓦茨街南段小巷，滿分小店", addr: "1056 Budapest, Irányi u. 27", url: "https://www.google.com/maps/search/?api=1&query=Moon+Food+and+Bar+Budapest" },
+                    { name: "Quán Nón Budapest", type: "亞洲風味(越)", price: "€10–18", rate: "4.4", desc: "市中心便利選擇，口味正宗", addr: "1051 Budapest, Erzsébet tér 1", url: "https://www.google.com/maps/search/?api=1&query=Quan+Non+Budapest" },
+                    { name: "The Gangnam", type: "亞洲風味(韓)", price: "€15–25", rate: "4.4", desc: "飯店同條街，道地韓式料理", addr: "1051 Budapest, Sas u 25", url: "https://www.google.com/maps/search/?api=1&query=The+Gangnam+Budapest" },
+                    { name: "Nanum", type: "亞洲風味(韓)", price: "€15–25", rate: "4.8", desc: "溫馨韓式家庭料理，需走一小段", addr: "1077 Budapest, Király u. 53", url: "https://www.google.com/maps/search/?api=1&query=Nanum+Korean+Restaurant+Budapest" },
+                    { name: "Kpub Korean Street Food", type: "亞洲風味(韓)", price: "€10–20", rate: "4.7", desc: "韓式街頭小吃，炸雞、年糕，氣氛熱鬧", addr: "1074 Budapest, Dohány u. 28", url: "https://www.google.com/maps/search/?api=1&query=Kpub+Budapest" },
 
                     // Western/Hungarian Options
-                    { name: "Menza Restaurant", type: "午餐選項", price: "€15–25", rate: "4.4", desc: "復古食堂風，推薦蒜頭湯、鴨肉燉飯", addr: "1061 Budapest, Liszt Ferenc tér 2" },
-                    { name: "KIOSK Budapest", type: "午餐選項", price: "€20–35", rate: "4.3", desc: "氣氛好、景觀佳", addr: "1056 Budapest, Március 15. tér 4" },
-                    { name: "VakVarjú Pest", type: "午餐選項", price: "€15–25", rate: "4.4", desc: "創意匈牙利菜、份量大", addr: "1061 Budapest, Paulay Ede u. 7" },
-                    { name: "Kiskakukk Étterem", type: "晚餐首選", price: "€20–30", rate: "4.5", desc: "鵝腿超強、最好訂位", addr: "1137 Budapest, Pozsonyi út 12" },
-                    { name: "Retek Bisztró", type: "晚餐新增", price: "€20–35", rate: "4.8", desc: "奶奶家傳風味、懷舊匈牙利菜", addr: "1051 Budapest, Nádor u. 5" },
-                    { name: "Pörc & Prézli Étterem", type: "晚餐新增", price: "€15–30", rate: "4.8", desc: "歌劇院旁、現場音樂、經典炸豬排", addr: "1065 Budapest, Lázár u. 1" },
-                    { name: "Stand25 Bisztró", type: "晚餐新增", price: "€30–50", rate: "4.6", desc: "米其林推薦、名廚小酒館 (布達側)", addr: "1013 Budapest, Attila út 10" },
-                    { name: "Tati Farm to Table", type: "晚餐新增", price: "€25–40", rate: "4.9", desc: "產地直送餐桌、自然酒、強調永續", addr: "1074 Budapest, Dohány u. 58-62" },
-                    { name: "Gettó Gulyás", type: "晚餐新增", price: "€15–25", rate: "4.5", desc: "猶太區燉肉專賣、各種 Pörkölt", addr: "1077 Budapest, Wesselényi u. 18" },
-                    { name: "Rosenstein Vendéglő", type: "晚餐新增", price: "€25–45", rate: "4.6", desc: "傳奇家族餐廳、猶太×匈牙利料理", addr: "1087 Budapest, Mosonyi u. 3" },
-                    { name: "Hungarikum Bisztró", type: "晚餐備選", price: "€20–30", rate: "4.7", desc: "超熱門匈牙利家常菜（排隊）", addr: "1051 Budapest, Steindl Imre u. 13" },
-                    { name: "Pomo D’Oro", type: "晚餐備選", price: "€20–35", rate: "4.6", desc: "（再次列入）飯店旁、方便", addr: "1051 Budapest, Arany János u. 9" }
+                    { name: "Menza Restaurant", type: "午餐選項", price: "€15–25", rate: "4.4", desc: "復古食堂風，推薦蒜頭湯、鴨肉燉飯", addr: "1061 Budapest, Liszt Ferenc tér 2", url: "https://www.google.com/maps/search/?api=1&query=Menza+Etterem+Budapest" },
+                    { name: "KIOSK Budapest", type: "午餐選項", price: "€20–35", rate: "4.3", desc: "氣氛好、景觀佳", addr: "1056 Budapest, Március 15. tér 4", url: "https://www.google.com/maps/search/?api=1&query=KIOSK+Budapest" },
+                    { name: "VakVarjú Pest", type: "午餐選項", price: "€15–25", rate: "4.4", desc: "創意匈牙利菜、份量大", addr: "1061 Budapest, Paulay Ede u. 7", url: "https://www.google.com/maps/search/?api=1&query=VakVarju+Pest+Budapest" },
+                    { name: "Kiskakukk Étterem", type: "晚餐首選", price: "€20–30", rate: "4.5", desc: "鵝腿超強、最好訂位", addr: "1137 Budapest, Pozsonyi út 12", url: "https://www.google.com/maps/search/?api=1&query=Kiskakukk+Etterem+Budapest" },
+                    { name: "Retek Bisztró", type: "晚餐新增", price: "€20–35", rate: "4.8", desc: "奶奶家傳風味、懷舊匈牙利菜", addr: "1051 Budapest, Nádor u. 5", url: "https://www.google.com/maps/search/?api=1&query=Retek+Bisztro+Budapest" },
+                    { name: "Pörc & Prézli Étterem", type: "晚餐新增", price: "€15–30", rate: "4.8", desc: "歌劇院旁、現場音樂、經典炸豬排", addr: "1065 Budapest, Lázár u. 1", url: "https://www.google.com/maps/search/?api=1&query=Porc+Prezli+Etterem+Budapest" },
+                    { name: "Stand25 Bisztró", type: "晚餐新增", price: "€30–50", rate: "4.6", desc: "米其林推薦、名廚小酒館 (布達側)", addr: "1013 Budapest, Attila út 10", url: "https://www.google.com/maps/search/?api=1&query=Stand25+Bisztro+Budapest" },
+                    { name: "Tati Farm to Table", type: "晚餐新增", price: "€25–40", rate: "4.9", desc: "產地直送餐桌、自然酒、強調永續", addr: "1074 Budapest, Dohány u. 58-62", url: "https://www.google.com/maps/search/?api=1&query=Tati+Farm+to+Table+Budapest" },
+                    { name: "Gettó Gulyás", type: "晚餐新增", price: "€15–25", rate: "4.5", desc: "猶太區燉肉專賣、各種 Pörkölt", addr: "1077 Budapest, Wesselényi u. 18", url: "https://www.google.com/maps/search/?api=1&query=Getto+Gulyas+Budapest" },
+                    { name: "Rosenstein Vendéglő", type: "晚餐新增", price: "€25–45", rate: "4.6", desc: "傳奇家族餐廳、猶太×匈牙利料理", addr: "1087 Budapest, Mosonyi u. 3", url: "https://www.google.com/maps/search/?api=1&query=Rosenstein+Vendeglo+Budapest" },
+                    { name: "Hungarikum Bisztró", type: "晚餐備選", price: "€20–30", rate: "4.7", desc: "超熱門匈牙利家常菜（排隊）", addr: "1051 Budapest, Steindl Imre u. 13", url: "https://www.google.com/maps/search/?api=1&query=Hungarikum+Bisztro+Budapest" },
+                    { name: "Pomo D’Oro", type: "晚餐備選", price: "€20–35", rate: "4.6", desc: "（再次列入）飯店旁、方便", addr: "1051 Budapest, Arany János u. 9", url: "https://www.google.com/maps/search/?api=1&query=Pomo+D’Oro+Budapest" }
                 ]
             },
             {
@@ -170,11 +170,11 @@
                     { time: "20:30", title: "Szimpla Kert", icon: "fa-glass-cheers", desc: "廢墟酒吧喝一杯", note: "可搭 Bolt 回飯店" }
                 ],
                 restaurants: [
-                    { name: "Paprika Vendéglő", type: "午餐熱門", price: "€15–25", rate: "4.6", desc: "道地匈牙利菜；排隊很長", addr: "1071 Budapest, Dózsa György út 72" },
-                    { name: "Városliget Café", type: "午餐備選", price: "€20–30", rate: "4.4", desc: "湖景最漂亮、氣氛優雅", addr: "1146 Budapest, Olof Palme sétány 5" },
-                    { name: "Gundel Restaurant", type: "午餐備選", price: "€30–50", rate: "4.4", desc: "百年老店；安靜舒服", addr: "1146 Budapest, Gundel Károly út 4" },
-                    { name: "Párisi Passage Café", type: "晚餐", price: "€25–40", rate: "4.5", desc: "華麗玻璃穹頂，必拍", addr: "1053 Budapest, Ferenciek tere 10" },
-                    { name: "Szimpla Kert", type: "酒吧", price: "€6–12", rate: "4.7", desc: "全球知名廢墟酒吧", addr: "1075 Budapest, Kazinczy u. 14" }
+                    { name: "Paprika Vendéglő", type: "午餐熱門", price: "€15–25", rate: "4.6", desc: "道地匈牙利菜；排隊很長", addr: "1071 Budapest, Dózsa György út 72", url: "https://www.google.com/maps/search/?api=1&query=Paprika+Vendeglo+Budapest" },
+                    { name: "Városliget Café", type: "午餐備選", price: "€20–30", rate: "4.4", desc: "湖景最漂亮、氣氛優雅", addr: "1146 Budapest, Olof Palme sétány 5", url: "https://www.google.com/maps/search/?api=1&query=Varosliget+Cafe+Budapest" },
+                    { name: "Gundel Restaurant", type: "午餐備選", price: "€30–50", rate: "4.4", desc: "百年老店；安靜舒服", addr: "1146 Budapest, Gundel Károly út 4", url: "https://www.google.com/maps/search/?api=1&query=Gundel+Restaurant+Budapest" },
+                    { name: "Párisi Passage Café", type: "晚餐", price: "€25–40", rate: "4.5", desc: "華麗玻璃穹頂，必拍", addr: "1053 Budapest, Ferenciek tere 10", url: "https://www.google.com/maps/search/?api=1&query=Parisi+Passage+Cafe+Budapest" },
+                    { name: "Szimpla Kert", type: "酒吧", price: "€6–12", rate: "4.7", desc: "全球知名廢墟酒吧", addr: "1075 Budapest, Kazinczy u. 14", url: "https://www.google.com/maps/search/?api=1&query=Szimpla+Kert+Budapest" }
                 ]
             },
             {
@@ -188,12 +188,12 @@
                     { time: "20:30", title: "廢墟酒吧或散步", icon: "fa-glass-cheers", desc: "若前一日已訪可略過；可在猶太區街道散步", note: "自由收尾" }
                 ],
                 restaurants: [
-                    { name: "New York Café", type: "早午餐", price: "€15–30", rate: "4.0", desc: "排隊名店；內裝最華麗", addr: "1073 Budapest, Erzsébet krt. 9–11" },
-                    { name: "Callas Café & Restaurant", type: "下午茶", price: "€10–20", rate: "4.3", desc: "歌劇院旁，環境典雅", addr: "1061 Budapest, Andrássy út 20" },
-                    { name: "Művész Kávéház", type: "下午茶", price: "€8–15", rate: "4.4", desc: "傳統藝術家咖啡館", addr: "1061 Budapest, Andrássy út 29" },
-                    { name: "Mazel Tov", type: "晚餐選項", price: "€20–30", rate: "4.5", desc: "中東網美餐廳、氣氛很好", addr: "1072 Budapest, Akácfa u. 47" },
-                    { name: "Dobrumba", type: "晚餐選項", price: "€15–25", rate: "4.6", desc: "地中海小菜超好吃", addr: "1074 Budapest, Dob u. 5" },
-                    { name: "Két Szerecsen", type: "晚餐選項", price: "€18–28", rate: "4.5", desc: "較不排隊、品質穩定", addr: "1065 Budapest, Nagymező u. 14" }
+                    { name: "New York Café", type: "早午餐", price: "€15–30", rate: "4.0", desc: "排隊名店；內裝最華麗", addr: "1073 Budapest, Erzsébet krt. 9–11", url: "https://www.google.com/maps/search/?api=1&query=New+York+Cafe+Budapest" },
+                    { name: "Callas Café & Restaurant", type: "下午茶", price: "€10–20", rate: "4.3", desc: "歌劇院旁，環境典雅", addr: "1061 Budapest, Andrássy út 20", url: "https://www.google.com/maps/search/?api=1&query=Callas+Cafe+Budapest" },
+                    { name: "Művész Kávéház", type: "下午茶", price: "€8–15", rate: "4.4", desc: "傳統藝術家咖啡館", addr: "1061 Budapest, Andrássy út 29", url: "https://www.google.com/maps/search/?api=1&query=Muvesz+Kavehaz+Budapest" },
+                    { name: "Mazel Tov", type: "晚餐選項", price: "€20–30", rate: "4.5", desc: "中東網美餐廳、氣氛很好", addr: "1072 Budapest, Akácfa u. 47", url: "https://www.google.com/maps/search/?api=1&query=Mazel+Tov+Budapest" },
+                    { name: "Dobrumba", type: "晚餐選項", price: "€15–25", rate: "4.6", desc: "地中海小菜超好吃", addr: "1074 Budapest, Dob u. 5", url: "https://www.google.com/maps/search/?api=1&query=Dobrumba+Budapest" },
+                    { name: "Két Szerecsen", type: "晚餐選項", price: "€18–28", rate: "4.5", desc: "較不排隊、品質穩定", addr: "1065 Budapest, Nagymező u. 14", url: "https://www.google.com/maps/search/?api=1&query=Ket+Szerecsen+Budapest" }
                 ]
             },
             {
@@ -208,10 +208,10 @@
                     { time: "20:00", title: "Salm Bräu 晚餐", icon: "fa-beer", desc: "修道院啤酒館，豬腳必點", note: "建議訂位" }
                 ],
                 restaurants: [
-                    { name: "Strudel House", type: "早餐", price: "€8–15", rate: "4.4", desc: "蘋果捲專賣、離教堂近", addr: "1051 Budapest, Október 6. u. 22" },
-                    { name: "Central Grand Café", type: "早餐", price: "€10–18", rate: "4.3", desc: "歷史咖啡館、好拍", addr: "1053 Budapest, Károlyi u. 9" },
-                    { name: "Gerlóczy Café", type: "早餐", price: "€10–18", rate: "4.5", desc: "巴黎風格小餐館", addr: "1052 Budapest, Gerlóczy u. 1" },
-                    { name: "Salm Bräu", type: "晚餐", price: "€20–30", rate: "4.5", desc: "豬腳＆啤酒必吃", addr: "1030 Vienna, Rennweg 8" }
+                    { name: "Strudel House", type: "早餐", price: "€8–15", rate: "4.4", desc: "蘋果捲專賣、離教堂近", addr: "1051 Budapest, Október 6. u. 22", url: "https://www.google.com/maps/search/?api=1&query=Strudel+House+Budapest" },
+                    { name: "Central Grand Café", type: "早餐", price: "€10–18", rate: "4.3", desc: "歷史咖啡館、好拍", addr: "1053 Budapest, Károlyi u. 9", url: "https://www.google.com/maps/search/?api=1&query=Central+Grand+Cafe+Budapest" },
+                    { name: "Gerlóczy Café", type: "早餐", price: "€10–18", rate: "4.5", desc: "巴黎風格小餐館", addr: "1052 Budapest, Gerlóczy u. 1", url: "https://www.google.com/maps/search/?api=1&query=Gerloczy+Cafe+Budapest" },
+                    { name: "Salm Bräu", type: "晚餐", price: "€20–30", rate: "4.5", desc: "豬腳＆啤酒必吃", addr: "1030 Vienna, Rennweg 8", url: "https://www.google.com/maps/search/?api=1&query=Salm+Brau+Vienna" }
                 ]
             },
             {
@@ -223,8 +223,8 @@
                     { time: "19:00", title: "Plachutta 晚餐", icon: "fa-utensils", desc: "清燉牛肉鍋 (Tafelspitz)", note: "維也納必吃國菜" }
                 ],
                 restaurants: [
-                    { name: "Schönbrunn Market", type: "午餐", price: "€5–15", rate: "4.5", desc: "美泉宮市集攤位，香腸、麵包湯", addr: "Schönbrunn Palace, Vienna" },
-                    { name: "Plachutta Wollzeile", type: "晚餐", price: "€25–40", rate: "4.5", desc: "Tafelspitz 清燉牛肉名店", addr: "1010 Vienna, Wollzeile 38" }
+                    { name: "Schönbrunn Market", type: "午餐", price: "€5–15", rate: "4.5", desc: "美泉宮市集攤位，香腸、麵包湯", addr: "Schönbrunn Palace, Vienna", url: "https://www.google.com/maps/search/?api=1&query=Schonbrunn+Christmas+Market" },
+                    { name: "Plachutta Wollzeile", type: "晚餐", price: "€25–40", rate: "4.5", desc: "Tafelspitz 清燉牛肉名店", addr: "1010 Vienna, Wollzeile 38", url: "https://www.google.com/maps/search/?api=1&query=Plachutta+Wollzeile" }
                 ]
             },
             {
@@ -236,11 +236,11 @@
                     { time: "19:00", title: "晚餐 3 選 1", icon: "fa-utensils", desc: "Figlmüller / Lugeck / Gasthaus Pöschl", note: "最後一晚大餐" }
                 ],
                 restaurants: [
-                    { name: "Café Central", type: "下午咖啡", price: "€10–15", rate: "4.5", desc: "最經典維也納咖啡館", addr: "1010 Vienna, Herrengasse 14" },
-                    { name: "Café Sacher", type: "下午備選", price: "€10–15", rate: "4.4", desc: "原創 Sacher 蛋糕", addr: "1010 Vienna, Philharmonikerstraße 4" },
-                    { name: "Figlmüller Wollzeile", type: "晚餐選項", price: "€20–30", rate: "4.3", desc: "巨大維也納炸豬排 (建議預約)", addr: "1010 Vienna, Wollzeile 5" },
-                    { name: "Lugeck", type: "晚餐選項", price: "€18–28", rate: "4.3", desc: "現代版奧地利菜", addr: "1010 Vienna, Lugeck 4" },
-                    { name: "Gasthaus Pöschl", type: "晚餐選項", price: "€18–28", rate: "4.4", desc: "在地人愛的家庭小館", addr: "1010 Vienna, Weihburggasse 17" }
+                    { name: "Café Central", type: "下午咖啡", price: "€10–15", rate: "4.5", desc: "最經典維也納咖啡館", addr: "1010 Vienna, Herrengasse 14", url: "https://www.google.com/maps/search/?api=1&query=Cafe+Central+Vienna" },
+                    { name: "Café Sacher", type: "下午備選", price: "€10–15", rate: "4.4", desc: "原創 Sacher 蛋糕", addr: "1010 Vienna, Philharmonikerstraße 4", url: "https://www.google.com/maps/search/?api=1&query=Cafe+Sacher+Vienna" },
+                    { name: "Figlmüller Wollzeile", type: "晚餐選項", price: "€20–30", rate: "4.3", desc: "巨大維也納炸豬排 (建議預約)", addr: "1010 Vienna, Wollzeile 5", url: "https://www.google.com/maps/search/?api=1&query=Figlmuller+Wollzeile" },
+                    { name: "Lugeck", type: "晚餐選項", price: "€18–28", rate: "4.3", desc: "現代版奧地利菜", addr: "1010 Vienna, Lugeck 4", url: "https://www.google.com/maps/search/?api=1&query=Lugeck+Vienna" },
+                    { name: "Gasthaus Pöschl", type: "晚餐選項", price: "€18–28", rate: "4.4", desc: "在地人愛的家庭小館", addr: "1010 Vienna, Weihburggasse 17", url: "https://www.google.com/maps/search/?api=1&query=Gasthaus+Poschl+Vienna" }
                 ]
             },
             {
@@ -261,8 +261,8 @@
             {
                 city: "Budapest",
                 name: "Ázsia Bt. (亞洲雜貨店)",
-                tag: "12/06 中央市場旁",
-                note: "⚠️ 週日公休，一定要 12/06 去！",
+                tag: "12/06 補貨首選",
+                note: "距離 Sas utca 6 飯店約 1.5 公里 (步行 20 分)",
                 addr: "1093 Budapest, Vámház krt. 5",
                 desc: "布達佩斯最老牌亞洲超市；就在中央市場隔壁 1 分鐘；乾貨、醬料、泡麵、亞洲零食齊全。",
                 rate: "4.6",
