@@ -3,8 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <title>雙城冬季之旅</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
@@ -29,7 +27,7 @@
     <header class="fixed top-0 left-0 right-0 bg-white z-50">
         <div class="px-4 py-3 bg-red-800 text-white flex justify-between items-center shadow-sm">
             <div class="flex items-center">
-                <div class="mr-3 text-2xl">🇦🇹</div>
+                <div class="mr-3 text-2xl">🇦🇹 🇭🇺</div>
                 <div>
                     <h1 class="text-lg font-bold tracking-wide">冬日雙城遊</h1>
                     <p class="text-xs text-red-200">2025/12/04 - 12/12</p>
@@ -215,13 +213,16 @@
                     { time: "13:40", title: "前往維也納", icon: "fa-train", desc: "Budapest Keleti → Wien Hbf (約 16:20 抵達)", note: "依火車票為主" },
                     { time: "17:00", title: "Check-in", icon: "fa-hotel", desc: "Leonardo Hotel Vienna Hbf", note: "車站走路 3 分鐘" },
                     { time: "18:00", title: "市政廳聖誕市集 Rathausplatz", icon: "fa-tree", desc: "維也納最大、必去", note: "搭 U1 至 Karlsplatz → 轉 Tram D" },
-                    { time: "20:00", title: "Salm Bräu", icon: "fa-beer", desc: "豬肋排名店（美景宮旁）", note: "千萬別走路！從市政廳搭 Tram D → Schloss Belvedere 下車即達" }
+                    { time: "20:00", title: "Salm Bräu", icon: "fa-beer", desc: "豬肋排名店（美景宮旁）", note: "千萬別走路！搭 Tram D 直達。若客滿備案：Ribs of Vienna / 1516" }
                 ],
                 restaurants: [
                     { name: "Strudel House", type: "早餐", price: "€8–15", rate: "4.4", desc: "蘋果捲專賣、離教堂近", addr: "1051 Budapest, Október 6. u. 22", url: "https://www.google.com/maps/search/?api=1&query=Strudel+House+Budapest" },
                     { name: "Central Grand Café", type: "早餐", price: "€10–18", rate: "4.3", desc: "歷史咖啡館、好拍", addr: "1053 Budapest, Károlyi u. 9", url: "https://www.google.com/maps/search/?api=1&query=Central+Grand+Cafe+Budapest" },
                     { name: "Gerlóczy Café", type: "早餐", price: "€10–18", rate: "4.5", desc: "巴黎風格小餐館", addr: "1052 Budapest, Gerlóczy u. 1", url: "https://www.google.com/maps/search/?api=1&query=Gerloczy+Cafe+Budapest" },
-                    { name: "Salm Bräu", type: "晚餐", price: "€20–30", rate: "4.5", desc: "豬腳＆啤酒必吃", addr: "1030 Vienna, Rennweg 8", url: "https://www.google.com/maps/search/?api=1&query=Salm+Brau+Vienna" }
+                    { name: "Salm Bräu", type: "晚餐", price: "€20–30", rate: "4.5", desc: "豬腳＆啤酒必吃", addr: "1030 Vienna, Rennweg 8", url: "https://www.google.com/maps/search/?api=1&query=Salm+Brau+Vienna" },
+                    // Added Backups for 12/9
+                    { name: "Ribs of Vienna (首選備案)", type: "晚餐備案", price: "€20–35", rate: "4.5", desc: "一公尺長的豬肋排，口味偏甜像照燒醬", addr: "1010 Vienna, Weihburggasse 22", url: "https://www.google.com/maps/search/?api=1&query=Ribs+of+Vienna" },
+                    { name: "1516 Brewing Company (備案)", type: "晚餐備案", price: "€20–30", rate: "4.5", desc: "美式風格釀酒廠，肋排與啤酒都很強", addr: "1010 Vienna, Krugerstraße 18", url: "https://www.google.com/maps/search/?api=1&query=1516+Brewing+Company+Vienna" }
                 ]
             },
             {
@@ -231,11 +232,14 @@
                     { time: "12:30", title: "市集午餐", icon: "fa-utensils", desc: "在美泉宮市集直接吃", note: "省時省力" },
                     { time: "13:30", title: "史匹特貝格市集 Spittelberg", icon: "fa-gift", desc: "巷弄工藝市集＋文青氣氛", note: "U4 → U3 到 Volkstheater，步行 5 分鐘" },
                     { time: "15:30", title: "瑪麗亞泰瑞莎市集 MTP", icon: "fa-tree", desc: "兩大博物館間最華麗的市集", note: "走路 5 分鐘" },
-                    { time: "19:00", title: "Plachutta Tafelspitz", icon: "fa-utensils", desc: "奧匈清燉牛肉必吃", note: "務必預約" }
+                    { time: "19:00", title: "Plachutta Tafelspitz", icon: "fa-utensils", desc: "奧匈清燉牛肉必吃，沒位可看備案", note: "務必預約 (備案: Lugeck / 12使徒)" }
                 ],
                 restaurants: [
                     { name: "Schönbrunn Market", type: "午餐", price: "€5–15", rate: "4.5", desc: "美泉宮市集攤位，香腸、麵包湯", addr: "Schönbrunn Palace, Vienna", url: "https://www.google.com/maps/search/?api=1&query=Schonbrunn+Christmas+Market" },
-                    { name: "Plachutta Wollzeile", type: "晚餐", price: "€25–40", rate: "4.5", desc: "Tafelspitz 清燉牛肉名店", addr: "1010 Vienna, Wollzeile 38", url: "https://www.google.com/maps/search/?api=1&query=Plachutta+Wollzeile" }
+                    { name: "Plachutta Wollzeile", type: "晚餐", price: "€25–40", rate: "4.5", desc: "Tafelspitz 清燉牛肉名店", addr: "1010 Vienna, Wollzeile 38", url: "https://www.google.com/maps/search/?api=1&query=Plachutta+Wollzeile" },
+                    // Added Backups for 12/10
+                    { name: "Lugeck (首選備案)", type: "晚餐備案", price: "€25–40", rate: "4.3", desc: "Figlmüller家族開的現代酒館，環境更有質感", addr: "1010 Vienna, Lugeck 4", url: "https://www.google.com/maps/search/?api=1&query=Lugeck+Vienna" },
+                    { name: "Zwölf Apostelkeller (備案)", type: "晚餐備案", price: "€20–35", rate: "4.4", desc: "十二使徒地窖餐廳，在古老地下酒窖用餐", addr: "1010 Vienna, Sonnenfelsgasse 3", url: "https://www.google.com/maps/search/?api=1&query=Zwölf+Apostelkeller+Vienna" }
                 ]
             },
             {
@@ -246,14 +250,14 @@
                     { time: "13:00", title: "★ 百水公寓 Hundertwasserhaus", icon: "fa-building", desc: "維也納最怪童話建築，打卡必去", note: "U4 到 Schwedenplatz → 轉 Tram 1 → Hetzgasse" },
                     { time: "15:00", title: "★ 中央咖啡館 Café Central", icon: "fa-coffee", desc: "維也納最有名咖啡館", note: "原地 Tram 1 一車到底 → Rathausplatz 下車步行" },
                     { time: "17:00", title: "市中心步行區", icon: "fa-walking", desc: "史蒂芬大教堂 / Graben / Kohlmarkt", note: "直接步行" },
-                    { time: "19:00", title: "★ Figlmüller 炸豬排", icon: "fa-utensils", desc: "Wollzeile 本店；巨大豬排", note: "務必預約" }
+                    { time: "19:00", title: "★ Figlmüller 炸豬排", icon: "fa-utensils", desc: "本店(Wollzeile)若滿，去轉角二店", note: "務必預約，二店有啤酒！" }
                 ],
                 restaurants: [
                     { name: "Café Central", type: "下午咖啡", price: "€10–15", rate: "4.5", desc: "最經典維也納咖啡館", addr: "1010 Vienna, Herrengasse 14", url: "https://www.google.com/maps/search/?api=1&query=Cafe+Central+Vienna" },
                     { name: "Café Sacher", type: "下午備選", price: "€10–15", rate: "4.4", desc: "原創 Sacher 蛋糕", addr: "1010 Vienna, Philharmonikerstraße 4", url: "https://www.google.com/maps/search/?api=1&query=Cafe+Sacher+Vienna" },
-                    { name: "Figlmüller Wollzeile", type: "晚餐選項", price: "€20–30", rate: "4.3", desc: "巨大維也納炸豬排 (建議預約)", addr: "1010 Vienna, Wollzeile 5", url: "https://www.google.com/maps/search/?api=1&query=Figlmuller+Wollzeile" },
-                    { name: "Lugeck", type: "晚餐選項", price: "€18–28", rate: "4.3", desc: "現代版奧地利菜", addr: "1010 Vienna, Lugeck 4", url: "https://www.google.com/maps/search/?api=1&query=Lugeck+Vienna" },
-                    { name: "Gasthaus Pöschl", type: "晚餐選項", price: "€18–28", rate: "4.4", desc: "在地人愛的家庭小館", addr: "1010 Vienna, Weihburggasse 17", url: "https://www.google.com/maps/search/?api=1&query=Gasthaus+Poschl+Vienna" }
+                    { name: "Figlmüller Wollzeile", type: "晚餐選項", price: "€20–30", rate: "4.3", desc: "巨大維也納炸豬排 (本店不賣啤酒)", addr: "1010 Vienna, Wollzeile 5", url: "https://www.google.com/maps/search/?api=1&query=Figlmuller+Wollzeile" },
+                    // Added Backup for 12/11
+                    { name: "Figlmüller Bäckerstraße (二店)", type: "晚餐首選", price: "€20–35", rate: "4.4", desc: "比本店好訂位！而且這間有賣啤酒！", addr: "1010 Vienna, Bäckerstraße 6", url: "https://www.google.com/maps/search/?api=1&query=Figlmuller+Bäckerstraße" }
                 ]
             },
             {
