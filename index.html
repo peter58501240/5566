@@ -44,6 +44,7 @@
     </header>
 
     <!-- Main Content Container -->
+    <!-- 增加 pt-44 以避免被 Header 遮擋 -->
     <main class="container mx-auto px-4 pt-44 max-w-md pb-4 relative min-h-screen">
         
         <!-- Schedule View -->
@@ -180,23 +181,29 @@
             {
                 date: "12/08", day: "週一", city: "Budapest",
                 events: [
-                    { time: "09:00", title: "★ 塞切尼溫泉", icon: "fa-hot-tub", desc: "體驗戶外大池與蒸氣室", note: "週一早上人較少，避開週末人潮" },
-                    { time: "11:30", title: "英雄廣場", icon: "fa-monument", desc: "從溫泉步行 3 分鐘即達", note: "拍照好地點" },
-                    { time: "12:00", title: "城市公園 City Park", icon: "fa-tree", desc: "湖畔散步、拍 Vajdahunyad 城堡", note: "享受戶外時光" },
-                    { time: "12:30", title: "午餐 3 選 1", icon: "fa-utensils", desc: "① Paprika ② Városliget Café ③ Gundel", note: "Paprika 需排隊" },
-                    { time: "14:30", title: "安德拉什大道", icon: "fa-road", desc: "世界遺產大道，散步看建築", note: "可以逛逛沿途商店" },
-                    { time: "15:30", title: "大道咖啡時光", icon: "fa-coffee", desc: "找附近咖啡館休息 (Callas / Művész)", note: "提升腳力" },
-                    { time: "16:00", title: "恐怖之屋 / 歌劇院", icon: "fa-building", desc: "拍外觀或依體力參觀", note: "週一恐怖之屋公休 (僅看外觀)" },
-                    { time: "18:00", title: "★ Párisi Passage", icon: "fa-star", desc: "華麗玻璃穹頂晚餐", note: "建議預約" },
-                    { time: "20:30", title: "散步回飯店", icon: "fa-walking", desc: "欣賞夜景，慢慢走回 Sas utca", note: "自由收尾" }
+                    { time: "09:30", title: "出發去泡湯", icon: "fa-subway", desc: "睡飽出門，前往城市公園", note: "搭 M1 黃線地鐵 到 Széchenyi fürdő 站" },
+                    { time: "10:00", title: "★ 塞切尼溫泉", icon: "fa-hot-tub", desc: "體驗布達佩斯最經典的黃色巴洛克建築露天溫泉", note: "記得帶泳衣、拖鞋、毛巾 (現場租很貴)" },
+                    { time: "12:30", title: "英雄廣場", icon: "fa-monument", desc: "溫泉出來就是廣場，拍千年紀念碑", note: "兩側的美術館建築也很美" },
+                    { time: "12:45", title: "(彈性) 民族學博物館", icon: "fa-camera", desc: "【看體力決定】走到旁邊看新地標，走上屋頂花園拍照 (免費)", note: "如果餓了或累了，直接跳過，去吃飯" },
+                    { time: "13:15", title: "午餐 (3選1)", icon: "fa-utensils", desc: "Paprika Vendéglő (主推) / Városliget Café / Robinson", note: "Paprika 生意很好，若排太久直接換備案" },
+                    { time: "14:45", title: "移動到 Oktogon", icon: "fa-subway", desc: "吃飽後搭地鐵，跳過中間比較無聊的路段", note: "從 Hősök tere 搭 M1 到 Oktogon 站下車" },
+                    { time: "15:00", title: "安德拉什大道", icon: "fa-walking", desc: "從 Oktogon 散步 到歌劇院 (約 10-15 分鐘)", note: "沿途是世界遺產建築、精品店櫥窗" },
+                    { time: "15:30", title: "國家歌劇院", icon: "fa-landmark", desc: "進去參觀 大廳 (Foyer)，欣賞金碧輝煌的內部", note: "參觀大廳與商店免費，不用買導覽票" },
+                    { time: "16:00", title: "★ 咖啡時光(二選一)", icon: "fa-coffee", desc: "在歌劇院旁休息：Callas Café 或 Művész", note: "點杯咖啡或蛋糕歇腳，感受百年前文人氣氛" },
+                    { time: "17:00", title: "★ 最美圖書館", icon: "fa-book", desc: "Ervin Szabó Library (Wenckheim Palace) 參觀黃金宮殿廳", note: "搭 M3 或電車到 Kálvin tér，買 Tourist Ticket (觀光票)" },
+                    { time: "18:00", title: "自由橋 & 河岸", icon: "fa-camera", desc: "圖書館出來往河邊走，拍綠色自由橋與黃昏夜景", note: "沿著河岸 (佩斯側) 往北走，風景極佳" },
+                    { time: "19:00", title: "★ 晚餐 Párisi Passage", icon: "fa-star", desc: "絕美玻璃穹頂餐廳", note: "建議要有訂位，或提早去現場候位" },
+                    { time: "21:00", title: "續攤：SkyBar", icon: "fa-glass-cheers", desc: "High Note SkyBar (高空酒吧) 看聖史蒂芬教堂夜景", note: "就在飯店隔壁棟 (Aria Hotel)，喝完直接下樓" },
+                    { time: "22:30", title: "回飯店休息", icon: "fa-bed", desc: "走路 1 分鐘回 Sas utca 6", note: "整理行李，查好明天去火車站的路線" }
                 ],
                 restaurants: [
-                    { name: "Paprika Vendéglő", type: "午餐熱門", price: "€15–25", rate: "4.6", desc: "道地匈牙利菜；排隊很長", addr: "1071 Budapest, Dózsa György út 72", url: "https://www.google.com/maps/search/?api=1&query=Paprika+Vendeglo+Budapest" },
+                    { name: "Paprika Vendéglő", type: "午餐主推", price: "€15–25", rate: "4.6", desc: "傳統匈牙利菜，生意很好", addr: "1071 Budapest, Dózsa György út 72", url: "https://www.google.com/maps/search/?api=1&query=Paprika+Vendeglo+Budapest" },
                     { name: "Városliget Café", type: "午餐備選", price: "€20–30", rate: "4.4", desc: "湖景最漂亮、氣氛優雅", addr: "1146 Budapest, Olof Palme sétány 5", url: "https://www.google.com/maps/search/?api=1&query=Varosliget+Cafe+Budapest" },
-                    { name: "Gundel Restaurant", type: "午餐備選", price: "€30–50", rate: "4.4", desc: "百年老店；安靜舒服", addr: "1146 Budapest, Gundel Károly út 4", url: "https://www.google.com/maps/search/?api=1&query=Gundel+Restaurant+Budapest" },
-                    { name: "Callas Café & Restaurant", type: "下午茶", price: "€10–20", rate: "4.3", desc: "歌劇院旁，環境典雅", addr: "1061 Budapest, Andrássy út 20", url: "https://www.google.com/maps/search/?api=1&query=Callas+Cafe+Budapest" },
-                    { name: "Művész Kávéház", type: "下午茶", price: "€8–15", rate: "4.4", desc: "傳統藝術家咖啡館", addr: "1061 Budapest, Andrássy út 29", url: "https://www.google.com/maps/search/?api=1&query=Muvesz+Kavehaz+Budapest" },
-                    { name: "Párisi Passage Café", type: "晚餐", price: "€25–40", rate: "4.5", desc: "華麗玻璃穹頂，必拍", addr: "1053 Budapest, Ferenciek tere 10", url: "https://www.google.com/maps/search/?api=1&query=Parisi+Passage+Cafe+Budapest" }
+                    { name: "Robinson Restaurant", type: "午餐備選", price: "€25–40", rate: "4.5", desc: "湖畔餐廳，環境優美", addr: "1146 Budapest, City Park Lake", url: "https://www.google.com/maps/search/?api=1&query=Robinson+Restaurant+Budapest" },
+                    { name: "Callas Café & Restaurant", type: "下午茶", price: "€10–20", rate: "4.3", desc: "歌劇院隔壁，氣派典雅", addr: "1061 Budapest, Andrássy út 20", url: "https://www.google.com/maps/search/?api=1&query=Callas+Cafe+Budapest" },
+                    { name: "Művész Kávéház", type: "下午茶", price: "€8–15", rate: "4.4", desc: "斜對面復古蛋糕店", addr: "1061 Budapest, Andrássy út 29", url: "https://www.google.com/maps/search/?api=1&query=Muvesz+Kavehaz+Budapest" },
+                    { name: "Párisi Passage Café", type: "晚餐", price: "€25–40", rate: "4.5", desc: "華麗玻璃穹頂，必拍", addr: "1053 Budapest, Ferenciek tere 10", url: "https://www.google.com/maps/search/?api=1&query=Parisi+Passage+Cafe+Budapest" },
+                    { name: "High Note SkyBar", type: "酒吧", price: "€12–20", rate: "4.7", desc: "高空酒吧，看教堂夜景", addr: "1051 Budapest, Hercegprímás u. 5", url: "https://www.google.com/maps/search/?api=1&query=High+Note+SkyBar+Budapest" }
                 ]
             },
             {
