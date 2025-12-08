@@ -44,6 +44,7 @@
     </header>
 
     <!-- Main Content Container -->
+    <!-- 增加 pt-44 以避免被 Header 遮擋 -->
     <main class="container mx-auto px-4 pt-44 max-w-md pb-4 relative min-h-screen">
         
         <!-- Schedule View -->
@@ -85,7 +86,7 @@
     </a>
 
     <script>
-        // ---------------- Data ----------------
+        // ---------------- Data (Synced with Latest Excel & Verified Addresses) ----------------
         const itinerary = [
             {
                 date: "12/04", day: "週四", city: "移動日",
@@ -108,14 +109,14 @@
                     { time: "09:30", title: "布達王宮", icon: "fa-camera", desc: "外觀、廣場散步、眺望多瑙河", note: "此段拍照點多；如遇風大可縮短停留" },
                     { time: "10:00", title: "馬加什教堂", icon: "fa-church", desc: "可入內參觀或只看外觀", note: "入場可現場買票；拍彩色屋頂" },
                     { time: "10:30", title: "漁人堡", icon: "fa-chess-rook", desc: "布達佩斯最經典觀景台", note: "從馬加什教堂步行約 2 分鐘；建議先拍無人拱門" },
-                    { time: "12:30", title: "午餐 (3選1)", icon: "fa-utensils", desc: "Baltazar / Ramazuri / Jamie’s Italian", note: "皆在附近；依體力與排隊狀況決定" },
+                    { time: "12:30", title: "午餐 (3選1)", icon: "fa-utensils", desc: "Baltazar Grill / Ramazuri / Jamie’s Italian", note: "皆在附近；依體力與排隊狀況決定" },
                     { time: "下午", title: "回佩斯區休息", icon: "fa-bed", desc: "回飯店補眠、整理、暖身", note: "可搭公車下山或步行走回鎖鏈橋；避免晚上遊船過於疲累" },
                     { time: "17:00", title: "多瑙河夜遊船", icon: "fa-ship", desc: "17:00–18:15 遊船欣賞城堡山 + 國會夜景", note: "建議 16:50 抵達碼頭排隊；帶外套保暖" },
                     { time: "20:00", title: "Essência 米其林晚餐", icon: "fa-utensils", desc: "葡萄牙 × 匈牙利創意料理 (已訂位)", note: "建議 19:40 出發；晚餐後可散步回飯店" }
                 ],
                 restaurants: [
-                    { name: "Baltazar Grill", type: "午餐選項", price: "€20–35", rate: "4.4", desc: "城堡區最穩的餐廳、好訂位", addr: "1014 Budapest, Országház u. 31", url: "https://www.google.com/maps/search/?api=1&query=Baltazar+Grill+Budapest" },
-                    { name: "Ramazuri", type: "午餐選項", price: "€18–30", rate: "4.5", desc: "創意料理、氣氛輕鬆", addr: "1014 Budapest, Úri u. 30", url: "https://www.google.com/maps/search/?api=1&query=Ramazuri+Bistronomy+Budapest" },
+                    { name: "Baltazar Grill", type: "午餐選項", price: "€20–35", rate: "4.4", desc: "城堡區最穩的餐廳、好訂位", addr: "1014 Budapest, Országház u. 31", url: "https://maps.app.goo.gl/Uc8uJ7X5WpAKZ9eR8" },
+                    { name: "Ramazuri", type: "午餐選項", price: "€18–30", rate: "4.5", desc: "創意料理、氣氛輕鬆", addr: "1014 Budapest, Úri u. 30", url: "https://maps.app.goo.gl/6n4BMqKMQD9Z6jtH8" },
                     { name: "Jamie Oliver's Italian Buda Castle", type: "午餐選項", price: "€18–28", rate: "4.2", desc: "義大利連鎖品牌、口味穩", addr: "1014 Budapest, Szentháromság u. 9-11", url: "https://www.google.com/maps/search/?api=1&query=Jamie+Oliver's+Italian+Buda+Castle" },
                     { name: "Essência Restaurant", type: "晚餐", price: "€60–90", rate: "4.8", desc: "葡萄牙×匈牙利米其林餐廳", addr: "1051 Budapest, Sas u. 17", url: "https://www.google.com/maps/search/?api=1&query=Essência+Restaurant+Budapest" }
                 ]
@@ -138,7 +139,7 @@
                     { name: "Pho-Astoria Bistro", type: "亞洲風味(Pho)", price: "€8–15", rate: "4.8", desc: "評價極高越南河粉，Astoria站旁", addr: "1053 Budapest, Kossuth Lajos u. 6", url: "https://www.google.com/maps/search/?api=1&query=Pho-Astoria+Bistro+Budapest" },
                     { name: "Moon Food & Bar", type: "亞洲風味(Pho)", price: "€8–12", rate: "5.0", desc: "瓦茨街南段小巷，滿分小店", addr: "1056 Budapest, Irányi u. 27", url: "https://www.google.com/maps/search/?api=1&query=Moon+Food+and+Bar+Budapest" },
                     { name: "Quán Nón Budapest", type: "亞洲風味(越)", price: "€10–18", rate: "4.4", desc: "市中心便利選擇，口味正宗", addr: "1051 Budapest, Erzsébet tér 1", url: "https://www.google.com/maps/search/?api=1&query=Quan+Non+Budapest" },
-                    { name: "The Gangnam", type: "亞洲風味(韓)", price: "€15–25", rate: "4.4", desc: "飯店同條街，道地韓式料理", addr: "1051 Budapest, Sas u 25", url: "https://www.google.com/maps/search/?api=1&query=The+Gangnam+Budapest" },
+                    { name: "The Gangnam", type: "亞洲風味(韓)", price: "€15–25", rate: "4.4", desc: "同事飯店同條街，道地韓式料理", addr: "1051 Budapest, Sas u 25", url: "https://www.google.com/maps/search/?api=1&query=The+Gangnam+Budapest" },
                     { name: "Nanum", type: "亞洲風味(韓)", price: "€15–25", rate: "4.8", desc: "溫馨韓式家庭料理，需走一小段", addr: "1077 Budapest, Király u. 53", url: "https://www.google.com/maps/search/?api=1&query=Nanum+Korean+Restaurant+Budapest" },
                     { name: "Kpub Korean Street Food", type: "亞洲風味(韓)", price: "€10–20", rate: "4.7", desc: "韓式街頭小吃，炸雞、年糕，氣氛熱鬧", addr: "1074 Budapest, Dohány u. 28", url: "https://www.google.com/maps/search/?api=1&query=Kpub+Budapest" },
 
@@ -160,40 +161,42 @@
             {
                 date: "12/07", day: "週日", city: "Budapest",
                 events: [
-                    { time: "09:00", title: "★ 塞切尼溫泉", icon: "fa-hot-tub", desc: "體驗戶外大池與蒸氣室", note: "週日早上人較少" },
-                    { time: "11:30", title: "英雄廣場", icon: "fa-monument", desc: "從溫泉步行 3 分鐘即達", note: "拍照好地點" },
-                    { time: "12:00", title: "城市公園 City Park", icon: "fa-tree", desc: "湖畔散步、拍 Vajdahunyad 城堡", note: "週日適合戶外" },
-                    { time: "12:30", title: "午餐 3 選 1", icon: "fa-utensils", desc: "① Paprika ② Városliget Café ③ Gundel", note: "Paprika 需排隊" },
-                    { time: "14:30", title: "安德拉什大道", icon: "fa-road", desc: "世界遺產大道，散步看建築", note: "週日商店不開" },
-                    { time: "16:00", title: "恐怖之屋 / 歌劇院", icon: "fa-building", desc: "拍外觀或依體力參觀", note: "恐怖之屋週日有開" },
-                    { time: "18:00", title: "★ Párisi Passage", icon: "fa-star", desc: "華麗玻璃穹頂晚餐", note: "建議預約" },
-                    { time: "20:30", title: "Szimpla Kert", icon: "fa-glass-cheers", desc: "廢墟酒吧喝一杯", note: "可搭 Bolt 回飯店" }
+                    { time: "09:30", title: "New York Café", icon: "fa-coffee", desc: "華麗開場：享受世界最美咖啡館早午餐，避開尖峰時段", note: "建議預約或提早排隊" },
+                    { time: "12:00", title: "市區散策 / 移動", icon: "fa-walking", desc: "在市區稍微逛逛，或回飯店休息一下", note: "準備去吃遲來的午餐" },
+                    { time: "14:00", title: "Spicy Fish 麻辣煮魚", icon: "fa-fish", desc: "重口味午餐：在第十區(中國城)享用道地麻辣水煮魚", note: "非常飽足，晚餐可能不餓" },
+                    { time: "16:00", title: "猶太區巡禮 Part 1", icon: "fa-synagogue", desc: "參觀 Dohány Street 煙草街會堂周邊，欣賞建築", note: "歐洲最大的猶太會堂" },
+                    { time: "16:45", title: "猶太區巡禮 Part 2", icon: "fa-glass-cheers", desc: "Gozsdu Udvar 古茲杜庭院，穿梭熱鬧派對長廊", note: "週日傍晚氣氛依然很好" },
+                    { time: "17:30", title: "Szimpla Kert 微醺", icon: "fa-beer", desc: "進入布達佩斯最經典廢墟酒吧，體驗獨特氛圍", note: "點杯飲料感受一下" },
+                    { time: "19:30", title: "西站麥當勞", icon: "fa-hamburger", desc: "朝聖「世界最美麥當勞」，看透明輸送帶送餐", note: "McDonald's Nyugati，新奇體驗" },
+                    { time: "21:00", title: "回飯店", icon: "fa-bed", desc: "結束充實的一天，回飯店休息", note: "Sas utca 6" }
                 ],
                 restaurants: [
-                    { name: "Paprika Vendéglő", type: "午餐熱門", price: "€15–25", rate: "4.6", desc: "道地匈牙利菜；排隊很長", addr: "1071 Budapest, Dózsa György út 72", url: "https://www.google.com/maps/search/?api=1&query=Paprika+Vendeglo+Budapest" },
-                    { name: "Városliget Café", type: "午餐備選", price: "€20–30", rate: "4.4", desc: "湖景最漂亮、氣氛優雅", addr: "1146 Budapest, Olof Palme sétány 5", url: "https://www.google.com/maps/search/?api=1&query=Varosliget+Cafe+Budapest" },
-                    { name: "Gundel Restaurant", type: "午餐備選", price: "€30–50", rate: "4.4", desc: "百年老店；安靜舒服", addr: "1146 Budapest, Gundel Károly út 4", url: "https://www.google.com/maps/search/?api=1&query=Gundel+Restaurant+Budapest" },
-                    { name: "Párisi Passage Café", type: "晚餐", price: "€25–40", rate: "4.5", desc: "華麗玻璃穹頂，必拍", addr: "1053 Budapest, Ferenciek tere 10", url: "https://www.google.com/maps/search/?api=1&query=Parisi+Passage+Cafe+Budapest" },
-                    { name: "Szimpla Kert", type: "酒吧", price: "€6–12", rate: "4.7", desc: "全球知名廢墟酒吧", addr: "1075 Budapest, Kazinczy u. 14", url: "https://www.google.com/maps/search/?api=1&query=Szimpla+Kert+Budapest" }
+                    { name: "New York Café", type: "早午餐", price: "€15–30", rate: "4.0", desc: "世界最美咖啡館，極致華麗", addr: "1073 Budapest, Erzsébet krt. 9–11", url: "https://www.google.com/maps/search/?api=1&query=New+York+Cafe+Budapest" },
+                    { name: "Spicy Fish Budapest", type: "午餐", price: "€15–25", rate: "4.5", desc: "道地麻辣水煮魚，重口味首選", addr: "1107 Budapest, Jegenye u. 26", url: "https://www.google.com/maps/search/?api=1&query=Spicy+Fish+Budapest" },
+                    { name: "Szimpla Kert", type: "酒吧", price: "€5–10", rate: "4.7", desc: "必訪廢墟酒吧，氣氛滿分", addr: "1075 Budapest, Kazinczy u. 14", url: "https://www.google.com/maps/search/?api=1&query=Szimpla+Kert+Budapest" },
+                    { name: "McDonald's Nyugati", type: "晚餐/宵夜", price: "€5–10", rate: "4.4", desc: "世界最美麥當勞，透明輸送帶", addr: "1062 Budapest, Teréz krt. 55", url: "https://www.google.com/maps/search/?api=1&query=McDonald's+Nyugati+Budapest" }
                 ]
             },
             {
                 date: "12/08", day: "週一", city: "Budapest",
                 events: [
-                    { time: "09:00", title: "★ New York Café", icon: "fa-coffee", desc: "週一排隊較少；享受宮殿級早午餐", note: "建議 08:50 抵達；可能排 20–60 分鐘" },
-                    { time: "12:00", title: "猶太區散策", icon: "fa-synagogue", desc: "步行至 Dohány Street Synagogue 周邊逛街", note: "從咖啡館步行 7–10 分；可拍照牆面與小店" },
-                    { time: "13:30", title: "聖史蒂芬大教堂登頂", icon: "fa-archway", desc: "搭電梯登頂觀看布達佩斯全景；可順便看內部", note: "飯店旁；天氣好是最佳登頂時間" },
-                    { time: "15:30", title: "安德拉什大道咖啡", icon: "fa-coffee", desc: "找附近咖啡館休息 (Callas / Művész)", note: "提升腳力；維持下午輕鬆節奏" },
-                    { time: "18:30", title: "晚餐 3 選 1", icon: "fa-utensils", desc: "Mazel Tov / Dobrumba / Ket Szerecsen", note: "主推 Mazel Tov；Dobrumba 最美味" },
-                    { time: "20:30", title: "廢墟酒吧或散步", icon: "fa-glass-cheers", desc: "若前一日已訪可略過；可在猶太區街道散步", note: "自由收尾" }
+                    { time: "09:00", title: "★ 塞切尼溫泉", icon: "fa-hot-tub", desc: "體驗戶外大池與蒸氣室", note: "週一早上人較少，避開週末人潮" },
+                    { time: "11:30", title: "英雄廣場", icon: "fa-monument", desc: "從溫泉步行 3 分鐘即達", note: "拍照好地點" },
+                    { time: "12:00", title: "城市公園 City Park", icon: "fa-tree", desc: "湖畔散步、拍 Vajdahunyad 城堡", note: "享受戶外時光" },
+                    { time: "12:30", title: "午餐 3 選 1", icon: "fa-utensils", desc: "① Paprika ② Városliget Café ③ Gundel", note: "Paprika 需排隊" },
+                    { time: "14:30", title: "安德拉什大道", icon: "fa-road", desc: "世界遺產大道，散步看建築", note: "可以逛逛沿途商店" },
+                    { time: "15:30", title: "大道咖啡時光", icon: "fa-coffee", desc: "找附近咖啡館休息 (Callas / Művész)", note: "提升腳力" },
+                    { time: "16:00", title: "恐怖之屋 / 歌劇院", icon: "fa-building", desc: "拍外觀或依體力參觀", note: "週一恐怖之屋公休 (僅看外觀)" },
+                    { time: "18:00", title: "★ Párisi Passage", icon: "fa-star", desc: "華麗玻璃穹頂晚餐", note: "建議預約" },
+                    { time: "20:30", title: "散步回飯店", icon: "fa-walking", desc: "欣賞夜景，慢慢走回 Sas utca", note: "自由收尾" }
                 ],
                 restaurants: [
-                    { name: "New York Café", type: "早午餐", price: "€15–30", rate: "4.0", desc: "排隊名店；內裝最華麗", addr: "1073 Budapest, Erzsébet krt. 9–11", url: "https://www.google.com/maps/search/?api=1&query=New+York+Cafe+Budapest" },
+                    { name: "Paprika Vendéglő", type: "午餐熱門", price: "€15–25", rate: "4.6", desc: "道地匈牙利菜；排隊很長", addr: "1071 Budapest, Dózsa György út 72", url: "https://www.google.com/maps/search/?api=1&query=Paprika+Vendeglo+Budapest" },
+                    { name: "Városliget Café", type: "午餐備選", price: "€20–30", rate: "4.4", desc: "湖景最漂亮、氣氛優雅", addr: "1146 Budapest, Olof Palme sétány 5", url: "https://www.google.com/maps/search/?api=1&query=Varosliget+Cafe+Budapest" },
+                    { name: "Gundel Restaurant", type: "午餐備選", price: "€30–50", rate: "4.4", desc: "百年老店；安靜舒服", addr: "1146 Budapest, Gundel Károly út 4", url: "https://www.google.com/maps/search/?api=1&query=Gundel+Restaurant+Budapest" },
                     { name: "Callas Café & Restaurant", type: "下午茶", price: "€10–20", rate: "4.3", desc: "歌劇院旁，環境典雅", addr: "1061 Budapest, Andrássy út 20", url: "https://www.google.com/maps/search/?api=1&query=Callas+Cafe+Budapest" },
                     { name: "Művész Kávéház", type: "下午茶", price: "€8–15", rate: "4.4", desc: "傳統藝術家咖啡館", addr: "1061 Budapest, Andrássy út 29", url: "https://www.google.com/maps/search/?api=1&query=Muvesz+Kavehaz+Budapest" },
-                    { name: "Mazel Tov", type: "晚餐選項", price: "€20–30", rate: "4.5", desc: "中東網美餐廳、氣氛很好", addr: "1072 Budapest, Akácfa u. 47", url: "https://www.google.com/maps/search/?api=1&query=Mazel+Tov+Budapest" },
-                    { name: "Dobrumba", type: "晚餐選項", price: "€15–25", rate: "4.6", desc: "地中海小菜超好吃", addr: "1074 Budapest, Dob u. 5", url: "https://www.google.com/maps/search/?api=1&query=Dobrumba+Budapest" },
-                    { name: "Két Szerecsen", type: "晚餐選項", price: "€18–28", rate: "4.5", desc: "較不排隊、品質穩定", addr: "1065 Budapest, Nagymező u. 14", url: "https://www.google.com/maps/search/?api=1&query=Ket+Szerecsen+Budapest" }
+                    { name: "Párisi Passage Café", type: "晚餐", price: "€25–40", rate: "4.5", desc: "華麗玻璃穹頂，必拍", addr: "1053 Budapest, Ferenciek tere 10", url: "https://www.google.com/maps/search/?api=1&query=Parisi+Passage+Cafe+Budapest" }
                 ]
             },
             {
@@ -202,10 +205,10 @@
                     { time: "早餐", title: "早餐 3 選 1", icon: "fa-coffee", desc: "Strudel House / Central / Gerlóczy", note: "吃飽再出發" },
                     { time: "11:00", title: "最後散步", icon: "fa-walking", desc: "教堂周邊散步，回飯店拿行李", note: "檢查護照" },
                     { time: "12:00", title: "前往火車站", icon: "fa-taxi", desc: "前往 Keleti 火車站 (預留塞車時間)", note: "建議請飯店叫 Bolt" },
-                    { time: "13:40", title: "★ 火車往維也納", icon: "fa-train", desc: "Railjet 2.5-3 小時", note: "建議 13:10 抵達月台" },
-                    { time: "16:20", title: "抵達 + Check-in", icon: "fa-hotel", desc: "入住 Leonardo Hotel Vienna Hauptbahnhof", note: "就在車站旁，放好行李稍作休息" },
-                    { time: "18:00", title: "市政廳聖誕市集", icon: "fa-tree", desc: "維也納最大市集 + 溜冰場", note: "U1 轉 Tram D" },
-                    { time: "20:00", title: "Salm Bräu 晚餐", icon: "fa-beer", desc: "修道院啤酒館，豬腳必點", note: "建議訂位" }
+                    { time: "13:40", title: "前往維也納", icon: "fa-train", desc: "Budapest Keleti → Wien Hbf (約 16:20 抵達)", note: "依火車票為主" },
+                    { time: "17:00", title: "Check-in", icon: "fa-hotel", desc: "Leonardo Hotel Vienna Hbf", note: "車站走路 3 分鐘" },
+                    { time: "18:00", title: "市政廳聖誕市集 Rathausplatz", icon: "fa-tree", desc: "維也納最大、必去", note: "搭 U1 至 Karlsplatz → 轉 Tram D" },
+                    { time: "20:00", title: "Salm Bräu", icon: "fa-beer", desc: "豬肋排名店（美景宮旁）", note: "千萬別走路！從市政廳搭 Tram D → Schloss Belvedere 下車即達" }
                 ],
                 restaurants: [
                     { name: "Strudel House", type: "早餐", price: "€8–15", rate: "4.4", desc: "蘋果捲專賣、離教堂近", addr: "1051 Budapest, Október 6. u. 22", url: "https://www.google.com/maps/search/?api=1&query=Strudel+House+Budapest" },
@@ -217,10 +220,11 @@
             {
                 date: "12/10", day: "週三", city: "Vienna",
                 events: [
-                    { time: "09:00", title: "★ 美泉宮", icon: "fa-crown", desc: "參觀宮殿內部、庭園、Gloriette", note: "預留 3-4 小時" },
-                    { time: "13:00", title: "美泉宮市集", icon: "fa-gift", desc: "市集午餐：麵包湯、香腸", note: "宮殿前廣場" },
-                    { time: "15:00", title: "美景宮", icon: "fa-palette", desc: "上宮參觀 Klimt《吻》", note: "花園免費" },
-                    { time: "19:00", title: "Plachutta 晚餐", icon: "fa-utensils", desc: "清燉牛肉鍋 (Tafelspitz)", note: "維也納必吃國菜" }
+                    { time: "09:00", title: "★ 美泉宮（不進室內）", icon: "fa-crown", desc: "聖誕市集＋後花園＋凱旋門景觀", note: "搭 U4 至 Schönbrunn" },
+                    { time: "12:30", title: "市集午餐", icon: "fa-utensils", desc: "在美泉宮市集直接吃", note: "省時省力" },
+                    { time: "13:30", title: "史匹特貝格市集 Spittelberg", icon: "fa-gift", desc: "巷弄工藝市集＋文青氣氛", note: "U4 → U3 到 Volkstheater，步行 5 分鐘" },
+                    { time: "15:30", title: "瑪麗亞泰瑞莎市集 MTP", icon: "fa-tree", desc: "兩大博物館間最華麗的市集", note: "走路 5 分鐘" },
+                    { time: "19:00", title: "Plachutta Tafelspitz", icon: "fa-utensils", desc: "奧匈清燉牛肉必吃", note: "務必預約" }
                 ],
                 restaurants: [
                     { name: "Schönbrunn Market", type: "午餐", price: "€5–15", rate: "4.5", desc: "美泉宮市集攤位，香腸、麵包湯", addr: "Schönbrunn Palace, Vienna", url: "https://www.google.com/maps/search/?api=1&query=Schonbrunn+Christmas+Market" },
@@ -230,10 +234,12 @@
             {
                 date: "12/11", day: "週四", city: "Vienna",
                 events: [
-                    { time: "09:30", title: "藝術史博物館", icon: "fa-university", desc: "世界級收藏，華麗圓頂咖啡", note: "週四開到 21:00" },
-                    { time: "13:00", title: "霍夫堡 + 圖書館", icon: "fa-book", desc: "看外觀與英雄廣場", note: "市中心步行" },
-                    { time: "15:30", title: "老城咖啡巡禮", icon: "fa-coffee", desc: "Café Central 或 Café Sacher", note: "需排隊" },
-                    { time: "19:00", title: "晚餐 3 選 1", icon: "fa-utensils", desc: "Figlmüller / Lugeck / Gasthaus Pöschl", note: "最後一晚大餐" }
+                    { time: "09:30", title: "★ 納許市場 Naschmarkt", icon: "fa-store", desc: "維也納最大傳統市場（早餐＋逛）", note: "U4 至 Kettenbrückengasse" },
+                    { time: "11:30", title: "Lili Markt 亞超", icon: "fa-shopping-basket", desc: "補零食、泡麵", note: "步行 2 分鐘" },
+                    { time: "13:00", title: "★ 百水公寓 Hundertwasserhaus", icon: "fa-building", desc: "維也納最怪童話建築，打卡必去", note: "U4 到 Schwedenplatz → 轉 Tram 1 → Hetzgasse" },
+                    { time: "15:00", title: "★ 中央咖啡館 Café Central", icon: "fa-coffee", desc: "維也納最有名咖啡館", note: "原地 Tram 1 一車到底 → Rathausplatz 下車步行" },
+                    { time: "17:00", title: "市中心步行區", icon: "fa-walking", desc: "史蒂芬大教堂 / Graben / Kohlmarkt", note: "直接步行" },
+                    { time: "19:00", title: "★ Figlmüller 炸豬排", icon: "fa-utensils", desc: "Wollzeile 本店；巨大豬排", note: "務必預約" }
                 ],
                 restaurants: [
                     { name: "Café Central", type: "下午咖啡", price: "€10–15", rate: "4.5", desc: "最經典維也納咖啡館", addr: "1010 Vienna, Herrengasse 14", url: "https://www.google.com/maps/search/?api=1&query=Cafe+Central+Vienna" },
@@ -246,8 +252,9 @@
             {
                 date: "12/12", day: "週五", city: "返家",
                 events: [
-                    { time: "07:40", title: "前往機場", icon: "fa-plane-departure", desc: "Wien Hbf 搭火車至 VIE 機場", note: "搭 Railjet / CAT" },
-                    { time: "10:40", title: "CI64 飛台北", icon: "fa-plane", desc: "平安回家", note: "See you next time" }
+                    { time: "07:00", title: "早餐（可選）", icon: "fa-coffee", desc: "飯店附近簡單吃即可", note: "時間緊，不建議跑遠" },
+                    { time: "07:40", title: "前往機場", icon: "fa-plane-departure", desc: "前往 Vienna Airport (VIE)", note: "住 Hbf 的特權：直接搭 Railjet (RJX) → 15 分鐘到機場，比 CAT 更快更省錢" },
+                    { time: "10:40", title: "飛機起飛", icon: "fa-plane", desc: "CI64 回台灣", note: "旅途平安" }
                 ],
                 restaurants: [
                     { name: "機場餐飲", type: "早餐", price: "N/A", rate: "N/A", desc: "維也納機場內輕食或貴賓室", addr: "Vienna International Airport", url: "#" }
